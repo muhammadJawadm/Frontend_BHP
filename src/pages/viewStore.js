@@ -28,6 +28,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { useToast } from '../hooks/use-toast';
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+
 const ViewStore = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -81,7 +83,7 @@ const ViewStore = () => {
         setLoading(true);
         
         // Fetch store details
-        const storeResponse = await fetch(`http://localhost:5000/api/stores/${storeId}`);
+        const storeResponse = await fetch(`${BASE_URL}/api/stores/${storeId}`);
         if (!storeResponse.ok) {
           throw new Error(`Failed to fetch store: ${storeResponse.status}`);
         }
@@ -89,7 +91,7 @@ const ViewStore = () => {
         setStore(storeResult.store);
 
         // Fetch store products
-        const productsResponse = await fetch(`http://localhost:5000/api/products/store/${storeId}`);
+        const productsResponse = await fetch(`${BASE_URL}/api/products/store/${storeId}`);
         if (!productsResponse.ok) {
           throw new Error(`Failed to fetch products: ${productsResponse.status}`);
         }

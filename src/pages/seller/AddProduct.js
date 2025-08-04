@@ -9,7 +9,7 @@ import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 // Fallback categories if import fails
 const categories = [
   'Electronics',
@@ -260,7 +260,7 @@ const AddProduct = () => {
       console.log('Sending payload with store ID:', storeId, payload);
 
       // API Call
-      const response = await fetch('http://localhost:5000/api/products', {
+      const response = await fetch(`${BASE_URL}/api/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -374,7 +374,7 @@ const AddProduct = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="price">Regular Price ($) *</Label>
+                      <Label htmlFor="price">Regular Price (Rs) *</Label>
                       <div className="relative mt-1">
                         <Input
                           id="price"
@@ -393,7 +393,7 @@ const AddProduct = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="sale_price">Sale Price ($)</Label>
+                      <Label htmlFor="sale_price">Sale Price (Rs)</Label>
                       <div className="relative mt-1">
                         <Input
                           id="sale_price"
@@ -620,7 +620,7 @@ const AddProduct = () => {
                   <li>• Research competitor prices</li>
                   <li>• Use sale prices for promotions</li>
                   <li>• Set realistic sale end dates</li>
-                  <li>• Consider psychological pricing ($9.99 vs $10)</li>
+                  <li>• Consider psychological pricing (Rs.9.99 vs Rs.10)</li>
                 </ul>
               </div>
               <div>

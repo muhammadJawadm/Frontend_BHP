@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 // import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 const SellerLogin = () => {
   const [formData, setFormData] = useState({
@@ -65,7 +66,7 @@ const SellerLogin = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch('http://localhost:5000/api/seller/login', {
+      const response = await fetch(`${BASE_URL}/api/seller/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

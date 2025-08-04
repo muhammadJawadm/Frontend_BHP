@@ -8,6 +8,7 @@ import { Label } from '../../components/ui/label';
 import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useToast } from '../../hooks/use-toast';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 const CreateStore = () => {
   const [formData, setFormData] = useState({
@@ -210,7 +211,7 @@ const CreateStore = () => {
 
       console.log('Request Body:', requestBody);
 
-      const response = await fetch('http://localhost:5000/api/store', {
+      const response = await fetch(`${BASE_URL}/api/store`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

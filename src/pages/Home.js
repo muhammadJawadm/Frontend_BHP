@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import logoBHP from '../assets/Black.png'; // Assuming you have a logo image
 import { ArrowRight, Star, Users, ShoppingBag, Zap, Search, ShoppingCart, User, Menu, X, Heart, Filter, ChevronLeft, ChevronRight, Truck, Shield, RefreshCw, ChevronDown, LogOut } from 'lucide-react';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 const Homepage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -72,7 +73,7 @@ const Homepage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products/all');
+        const response = await fetch(`${BASE_URL}/api/products/all`);
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
@@ -84,7 +85,7 @@ const Homepage = () => {
 
     const fetchStores = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/stores');
+        const response = await fetch(`${BASE_URL}/api/stores`);
         const data = await response.json();
         if (data.stores) {
           setStores(data.stores);
@@ -146,7 +147,7 @@ const Homepage = () => {
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/order/createOrder', {
+      const response = await fetch('https://buyherpower.com/buyHerPower/api/order/createOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

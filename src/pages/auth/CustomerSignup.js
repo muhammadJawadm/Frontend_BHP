@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 const CustomerSignup = () => {
   const [formData, setFormData] = useState({
@@ -63,7 +64,7 @@ const CustomerSignup = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/customer/signup', {
+      const response = await fetch(`${BASE_URL}/api/customer/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

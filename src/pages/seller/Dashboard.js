@@ -9,6 +9,8 @@ import { Badge } from '../../components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
+const BASE_URL = process.env.BASE_URL ;
+
 
 const Dashboard = () => {
   // Add error boundary for useAuth
@@ -79,7 +81,7 @@ const Dashboard = () => {
 
         // Fetch store details from API
         console.log('Fetching store with ID:', storeId);
-        const storeResponse = await fetch(`http://localhost:5000/api/stores/${storeId}`);
+        const storeResponse = await fetch(`${BASE_URL}r/api/stores/${storeId}`);
         
         if (!storeResponse.ok) {
           throw new Error(`Failed to fetch store: ${storeResponse.status}`);
@@ -93,7 +95,7 @@ const Dashboard = () => {
           
           // Fetch products for this store
           try {
-            const productsResponse = await fetch(`http://localhost:5000/api/products/store/${storeResult.store._id}`);
+            const productsResponse = await fetch(`${BASE_URL}/api/products/store/${storeResult.store._id}`);
             if (productsResponse.ok) {
               const productsResult = await productsResponse.json();
               setProducts(productsResult.products || []);
@@ -210,7 +212,7 @@ const Dashboard = () => {
       const token = localStorage.getItem('token');
       if (token) {
         // Try API delete first
-        const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+        const response = await fetch(`${BASE_URL}/api/products/${productId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
