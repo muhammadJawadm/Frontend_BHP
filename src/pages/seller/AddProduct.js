@@ -388,7 +388,7 @@ const AddProduct = () => {
                           className="pl-10"
                           placeholder="0.00"
                         />
-                        <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                        {/* <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" /> */}
                       </div>
                     </div>
 
@@ -534,10 +534,10 @@ const AddProduct = () => {
                           {formData.sale_price ? (
                             <>
                               <span className="text-xl font-bold text-red-600">
-                                ${parseFloat(formData.sale_price).toFixed(2)}
+                                {parseFloat(formData.sale_price).toFixed(2)}
                               </span>
                               <span className="text-sm text-slate-500 line-through">
-                                ${parseFloat(formData.price).toFixed(2)}
+                                {parseFloat(formData.price).toFixed(2)}
                               </span>
                               <span className="text-xs bg-red-500 text-white px-2 py-1 rounded">
                                 SALE
@@ -545,14 +545,14 @@ const AddProduct = () => {
                             </>
                           ) : (
                             <span className="text-xl font-bold text-slate-900">
-                              ${parseFloat(formData.price).toFixed(2)}
+                              {parseFloat(formData.price).toFixed(2)}
                             </span>
                           )}
                         </div>
                         {formData.sale_price && (
                           <div className="mt-2">
                             <p className="text-sm text-green-600">
-                              Save ${(parseFloat(formData.price) - parseFloat(formData.sale_price)).toFixed(2)}!
+                              Save {(parseFloat(formData.price) - parseFloat(formData.sale_price)).toFixed(2)}!
                             </p>
                             {formData.saleEndingDate && (
                               <p className="text-xs text-slate-500 mt-1">
