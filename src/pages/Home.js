@@ -459,10 +459,7 @@ const Homepage = () => {
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
                     <h2 className="text-xl md:text-2xl mb-4 opacity-90">{slide.subtitle}</h2>
                     <p className="text-lg mb-8 opacity-80">{slide.description}</p>
-                    <button className="bg-white text-gray-900 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
-                      {slide.buttonText}
-                      <ArrowRight className="inline ml-2 h-5 w-5" />
-                    </button>
+                  
                   </div>
                   <div className="hidden md:block w-1/2">
                     <img
