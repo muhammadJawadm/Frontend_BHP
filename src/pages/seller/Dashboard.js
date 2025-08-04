@@ -9,7 +9,7 @@ import { Badge } from '../../components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL ;
+const BASE_URL = process.env.BASE_URL|| 'http://localhost:5000';
 
 
 const Dashboard = () => {
@@ -81,7 +81,7 @@ const Dashboard = () => {
 
         // Fetch store details from API
         console.log('Fetching store with ID:', storeId);
-        const storeResponse = await fetch(`${BASE_URL}r/api/stores/${storeId}`);
+        const storeResponse = await fetch(`${BASE_URL}/api/stores/${storeId}`);
         
         if (!storeResponse.ok) {
           throw new Error(`Failed to fetch store: ${storeResponse.status}`);
