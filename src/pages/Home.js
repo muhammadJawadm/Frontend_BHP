@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import logoBHP from '../assets/Black.png'; // Assuming you have a logo image
 import { ArrowRight, Star, Users, ShoppingBag, Zap, Search, ShoppingCart, User, Menu, X, Heart, Filter, ChevronLeft, ChevronRight, Truck, Shield, RefreshCw, ChevronDown, LogOut } from 'lucide-react';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const BASE_URL = process.env.REACT_APP_BASE_URL|| 'http://localhost:5000';
 console.log('Base URL:', BASE_URL);
 const Homepage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
