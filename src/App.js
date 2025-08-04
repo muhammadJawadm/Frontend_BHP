@@ -10,6 +10,7 @@ import CustomerSignup from "./pages/auth/CustomerSignup";
 import Dashboard from "./pages/seller/Dashboard";
 import { AuthProvider } from './components/context/AuthContext';
 import AddProduct from "./pages/seller/AddProduct";
+import ViewStore from "./pages/viewStore";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/seller/signup/step2" element={<SellerSignupStep2 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/AddProduct" element={<AddProduct />} />
+          <Route path="/dashboard/store/:storeId" element={<ViewStore />} />
 
         </Routes>
         </AuthProvider>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '../components/ui/button';
 import logoBHP from '../assets/Black.png'; // Assuming you have a logo image
 import { ArrowRight, Star, Users, ShoppingBag, Zap, Search, ShoppingCart, User, Menu, X, Heart, Filter, ChevronLeft, ChevronRight, Truck, Shield, RefreshCw, ChevronDown, LogOut } from 'lucide-react';
 
@@ -408,7 +409,7 @@ const Homepage = () => {
               
 <Link to="/seller/signup">
   <button className="bg-slate-800 text-white px-4 py-2 rounded-md hover:bg-slate-900">
-    Sell on ShopHub
+    Sell on BHP
   </button>
 </Link>
             </div>
@@ -507,7 +508,7 @@ const Homepage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-            <p className="text-lg text-gray-600">Discover products across all categories</p>
+            <p className="text-lg text-gray-600"> All categories</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
@@ -737,7 +738,11 @@ const Homepage = () => {
                   <span>Products</span>
                 </div>
                 <div className="text-sm text-gray-500 mb-4">
-                  Verified Store
+                   <Link to={`/dashboard/store/${store._id}`}>
+                                  <Button variant="outline">
+                                    View Store
+                                  </Button>
+                                </Link>
                 </div>
               </div>
             ))}
@@ -771,9 +776,7 @@ const Homepage = () => {
             Join thousands of satisfied customers and sellers on ShopHub today
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <button className="bg-white text-slate-900 px-8 py-3 rounded-md hover:bg-gray-100 transition-colors font-semibold">
-              Shop Now
-            </button>
+            
             <Link to="/seller/signup">
             <button className="border border-white text-white px-8 py-3 rounded-md hover:bg-white hover:text-slate-900 transition-colors font-semibold">
               Start Selling

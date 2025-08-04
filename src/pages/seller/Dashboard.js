@@ -334,12 +334,12 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="mt-4 md:mt-0 flex space-x-2">
-              <Link to={`/dashboard/store/${store._id}`}>
+              {/* <Link to={`/dashboard/store/${store._id}`}>
                 <Button className="bg-slate-800 hover:bg-slate-900">
                   <Eye className="h-4 w-4 mr-2" />
                   View Store
                 </Button>
-              </Link>
+              </Link> */}
               {/* Updated Add Product link to pass store ID */}
               <Link to="/addproduct" state={{ storeId: store._id }}>
                 <Button className="bg-slate-800 hover:bg-slate-900">
@@ -444,10 +444,10 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-slate-600">Revenue (Mock)</p>
-                  <p className="text-3xl font-bold text-slate-900">${stats.totalRevenue.toLocaleString()}</p>
+                  <p className="text-3xl font-bold text-slate-900">Rs.{stats.totalRevenue.toLocaleString()}</p>
                 </div>
                 <div className="bg-green-100 p-3 rounded-full">
-                  <DollarSign className="h-6 w-6 text-green-600" />
+                  {/* <DollarSign className="h-6 w-6 text-green-600" /> */}
                 </div>
               </div>
               <p className="text-sm text-green-600 mt-2">
@@ -462,7 +462,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-slate-600">Average Rating</p>
-                  <p className="text-3xl font-bold text-slate-900">{stats.averageRating}</p>
+                  <p className="text-3xl font-bold text-slate-900">3.5</p>
                 </div>
                 <div className="bg-yellow-100 p-3 rounded-full">
                   <Star className="h-6 w-6 text-yellow-600" />
