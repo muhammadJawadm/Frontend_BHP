@@ -24,7 +24,7 @@ const OrderHistory = () => {
       try {
         const token = localStorage.getItem('token');
         const response = await fetch(
-          `http://localhost:5000/api/orders/customer?page=${currentPage}&limit=5`, 
+          `https://backend-bhp.onrender.com/api/orders/customer?page=${currentPage}&limit=5`, 
           {
             headers: {
               'Authorization': `Bearer ${token}`

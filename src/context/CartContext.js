@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
       
       // If user is logged in, use API to add to cart
       if (token) {
-        const response = await fetch('http://localhost:5000/api/cart', {
+        const response = await fetch('https://backend-bhp.onrender.com/api/cart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const CartProvider = ({ children }) => {
       
       // If user is logged in, use API to remove from cart
       if (token) {
-        const response = await fetch(`http://localhost:5000/api/cart/${productId}`, {
+        const response = await fetch(`https://backend-bhp.onrender.com/api/cart/${productId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

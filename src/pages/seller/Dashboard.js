@@ -9,7 +9,7 @@ import { Badge } from '../../components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL|| 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL|| 'https://backend-bhp.onrender.com';
 
 
 const Dashboard = () => {

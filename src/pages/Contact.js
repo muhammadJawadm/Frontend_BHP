@@ -37,7 +37,7 @@ const Contact = () => {
     // Simulate API request
     try {
       // In a real app, you would send this data to your backend
-      // const response = await fetch('http://localhost:5000/api/contact', {
+      // const response = await fetch('https://backend-bhp.onrender.com/api/contact', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(formData)

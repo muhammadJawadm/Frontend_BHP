@@ -66,7 +66,7 @@ const AccountSettings = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('https://backend-bhp.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const AccountSettings = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/password', {
+      const response = await fetch('https://backend-bhp.onrender.com/api/profile/password', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ const AccountSettings = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/address', {
+      const response = await fetch('https://backend-bhp.onrender.com/api/profile/address', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

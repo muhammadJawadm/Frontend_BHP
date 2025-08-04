@@ -25,7 +25,7 @@ const OrderDetails = () => {
           throw new Error('Authentication token not found');
         }
         
-        const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+        const response = await fetch(`https://backend-bhp.onrender.com/api/orders/${orderId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -77,7 +77,7 @@ const OrderDetails = () => {
   // Function to handle order cancellation
   const handleCancelOrder = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/cancel`, {
+      const response = await fetch(`https://backend-bhp.onrender.com/api/orders/${orderId}/cancel`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

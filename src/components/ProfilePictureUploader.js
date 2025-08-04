@@ -21,7 +21,7 @@ const ProfilePictureUploader = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/picture', {
+      const response = await fetch('https://backend-bhp.onrender.com/api/profile/picture', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

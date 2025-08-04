@@ -49,7 +49,7 @@ export const WishlistProvider = ({ children }) => {
         return;
       }
       
-      const response = await fetch('http://localhost:5000/api/wishlist', {
+      const response = await fetch('https://backend-bhp.onrender.com/api/wishlist', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -78,7 +78,7 @@ export const WishlistProvider = ({ children }) => {
         }
         
         // If user is authenticated, add to API
-        const response = await fetch('http://localhost:5000/api/wishlist/add', {
+        const response = await fetch('https://backend-bhp.onrender.com/api/wishlist/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export const WishlistProvider = ({ children }) => {
         }
         
         // If user is authenticated, remove via API
-        const response = await fetch(`http://localhost:5000/api/wishlist/item/${productId}`, {
+        const response = await fetch(`https://backend-bhp.onrender.com/api/wishlist/item/${productId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -170,7 +170,7 @@ export const WishlistProvider = ({ children }) => {
         }
         
         // If user is authenticated, clear via API
-        const response = await fetch('http://localhost:5000/api/wishlist', {
+        const response = await fetch('https://backend-bhp.onrender.com/api/wishlist', {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

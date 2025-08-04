@@ -9,7 +9,7 @@ import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
 // Fallback categories if import fails
 const categories = [
   'Electronics',

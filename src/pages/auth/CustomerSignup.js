@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
 
 const CustomerSignup = () => {
   const [formData, setFormData] = useState({

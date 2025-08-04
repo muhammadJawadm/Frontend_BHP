@@ -22,7 +22,7 @@ const Products = () => {
 
   const [products, setProducts] = useState([]);
   React.useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch('https://backend-bhp.onrender.com/api/products')
       .then(res => res.json())
       .then(data => setProducts(data));
   }, []);

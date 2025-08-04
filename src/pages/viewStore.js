@@ -28,7 +28,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { useToast } from '../hooks/use-toast';
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
 
 const ViewStore = () => {
   const navigate = useNavigate();
