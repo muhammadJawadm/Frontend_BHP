@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import logoBHP from '../assets/Black.png'; // Assuming you have a logo image
 import { ArrowRight, Star, Users, ShoppingBag, Zap, Search, ShoppingCart, User, Menu, X, Heart, Filter, ChevronLeft, ChevronRight, Truck, Shield, RefreshCw, ChevronDown, LogOut } from 'lucide-react';
 
 const Homepage = () => {
@@ -195,15 +196,15 @@ const Homepage = () => {
                     {selectedProduct.sale_price ? (
                       <>
                         <span className="text-lg font-bold text-red-600">
-                          ₹{selectedProduct.sale_price}
+                          Rs.{selectedProduct.sale_price}
                         </span>
                         <span className="text-sm text-gray-500 line-through">
-                          ₹{selectedProduct.price}
+                          Rs{selectedProduct.price}
                         </span>
                       </>
                     ) : (
                       <span className="text-lg font-bold text-gray-900">
-                        ₹{selectedProduct.price}
+                        Rs.{selectedProduct.price}
                       </span>
                     )}
                   </div>
@@ -331,15 +332,15 @@ const Homepage = () => {
               <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
               <div className="flex justify-between text-sm">
                 <span>Product Price:</span>
-                <span>₹{selectedProduct?.sale_price || selectedProduct?.price}</span>
+                <span>R.s{selectedProduct?.sale_price || selectedProduct?.price}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span>Shipping:</span>
-                <span>₹{orderData.shippingPrice}</span>
+                <span>Rs.{orderData.shippingPrice}</span>
               </div>
               <div className="border-t border-gray-300 mt-2 pt-2 flex justify-between font-semibold">
                 <span>Total:</span>
-                <span>₹{(selectedProduct?.sale_price || selectedProduct?.price) + orderData.shippingPrice}</span>
+                <span>Rs.{(selectedProduct?.sale_price || selectedProduct?.price) + orderData.shippingPrice}</span>
               </div>
             </div>
 
@@ -382,12 +383,10 @@ const Homepage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold text-slate-900">ShopHub</h1>
-              </div>
-            </div>
-
+<div className="flex items-center space-x-2">
+      <img src={logoBHP} alt="ShopHub Logo" className="h-24 w-24 object-contain" />
+      {/* <h1 className="text-2xl font-bold text-slate-900">ShopHub</h1> */}
+    </div>
             {/* Search Bar */}
             <div className="hidden md:block flex-1 max-w-2xl mx-8">
               <div className="relative">
@@ -437,7 +436,7 @@ const Homepage = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 />
               </div>
-              <a href="" className="block px-3 py-2 bg-slate-800 text-white rounded-md">Sell on ShopHub</a>
+              <a href="/seller/signup" className="block px-3 py-2 bg-slate-800 text-white rounded-md">Sell on ShopHub</a>
             </div>
           </div>
         )}
@@ -538,7 +537,7 @@ const Homepage = () => {
                 <Truck className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Free Shipping</h3>
-              <p className="text-gray-600">Free shipping on orders over ₹500</p>
+              <p className="text-gray-600">Free shipping on orders over Rs.500</p>
             </div>
             
             <div className="text-center">
@@ -594,8 +593,8 @@ const Homepage = () => {
                     </h3>
                     <p className="text-sm text-gray-500 mb-2">{product.store_id?.name}</p>
                     <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-xl font-bold text-red-600">₹{product.sale_price}</span>
-                      <span className="text-sm text-gray-500 line-through">₹{product.price}</span>
+                      <span className="text-xl font-bold text-red-600">R.s{product.sale_price}</span>
+                      <span className="text-sm text-gray-500 line-through">Rs.{product.price}</span>
                     </div>
                     <div className="flex items-center mb-3">
                       <div className="flex items-center">
@@ -640,7 +639,7 @@ const Homepage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.slice(0, 8).map((product) => {
+            {products.slice(0, 20).map((product) => {
               const discount = calculateDiscount(product.price, product.sale_price);
               return (
                 <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
@@ -667,11 +666,11 @@ const Homepage = () => {
                     <div className="flex items-center space-x-2 mb-2">
                       {product.sale_price ? (
                         <>
-                          <span className="text-xl font-bold text-red-600">₹{product.sale_price}</span>
-                          <span className="text-sm text-gray-500 line-through">₹{product.price}</span>
+                          <span className="text-xl font-bold text-red-600">Rs.{product.sale_price}</span>
+                          <span className="text-sm text-gray-500 line-through">Rs.{product.price}</span>
                         </>
                       ) : (
-                        <span className="text-xl font-bold text-gray-900">₹{product.price}</span>
+                        <span className="text-xl font-bold text-gray-900">Rs.{product.price}</span>
                       )}
                     </div>
                     <div className="flex items-center mb-3">
