@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 // import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
+const BASE_URL = 'http://localhost:5000';
 
 const SellerLogin = () => {
   const [formData, setFormData] = useState({
@@ -82,6 +82,7 @@ const SellerLogin = () => {
       if (response.ok && result.seller) {
         // Store seller data
         localStorage.setItem('seller', JSON.stringify(result.seller));
+        localStorage.setItem('token', result.token);
         
         // Update auth context if available (optional)
         // if (login) {
@@ -93,8 +94,30 @@ const SellerLogin = () => {
           description: `Welcome back, ${result.seller.name}!`
         });
         
+
+        const sellerData = await fetch(`${BASE_URL}/api/stores/seller/my-stores`, {
+          headers: {
+            Authorization: `Bearer ${result.token}`
+          }
+        });
+        if (sellerData.ok) {
+          const stores = await sellerData.json();
+
+
+          localStorage.setItem('stores', JSON.stringify(stores));
+
+          var storeId = stores.stores[0]?._id ;
+        }
+
         // Navigate to dashboard
-        navigate(from, { replace: true });
+        navigate('/dashboard', { 
+          state: {
+            storeId: storeId,
+            seller: result.seller,
+            token: result.token
+          },
+          replace: true // Replace current history entry
+      });
       } else {
         // Handle specific error messages from API
         if (result.message && result.message.includes('Invalid credentials')) {

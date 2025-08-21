@@ -7,9 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { useToast } from '../../hooks/use-toast';
 
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
-
-
 const CustomerLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -36,7 +33,7 @@ const CustomerLogin = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/api/customer/login`, {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -47,31 +44,36 @@ const CustomerLogin = () => {
         })
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
-      }
-
       const data = await response.json();
-      
-      // Store token and user data in localStorage
-      if (data.token) {
-        localStorage.setItem('token', data.token);
+
+      if (response.ok) {
+        // Store token and user data in localStorage
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+        if (data.user) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
+        
+        toast({
+          title: "Login Successful!",
+          description: "Welcome back to BHP",
+        });
+        
+        // Reload the page to update header state
+        window.location.href = from;
+      } else {
+        toast({
+          title: "Login Failed",
+          description: data.message || 'Invalid credentials',
+          variant: "destructive",
+        });
       }
-      if (data.user) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-      }
-      
-      toast({
-        title: "Login Successful!",
-        description: "Welcome back to MarketHub",
-      });
-      
-      navigate(from, { replace: true });
     } catch (error) {
+      console.error('Login error:', error);
       toast({
-        title: "Login Failed",
-        description: error.message,
+        title: "Connection Error",
+        description: "Unable to connect to the server. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -96,7 +98,7 @@ const CustomerLogin = () => {
             <div className="bg-gradient-to-r from-slate-800 to-slate-600 text-white p-3 rounded-lg">
               <ShoppingBag className="h-6 w-6" />
             </div>
-            <span className="text-2xl font-bold text-slate-800">MarketHub</span>
+            <span className="text-2xl font-bold text-slate-800">BHP</span>
           </Link>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h1>
           <p className="text-slate-600">Sign in to your customer account</p>
@@ -191,7 +193,7 @@ const CustomerLogin = () => {
                   <div className="w-full border-t border-slate-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-slate-500">New to MarketHub?</span>
+                  <span className="px-2 bg-white text-slate-500">New to BHP?</span>
                 </div>
               </div>
 

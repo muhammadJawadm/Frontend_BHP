@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
 
 const CustomerSignup = () => {
   const [formData, setFormData] = useState({
@@ -64,7 +63,7 @@ const CustomerSignup = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/api/customer/signup`, {
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -111,7 +110,7 @@ const CustomerSignup = () => {
             <div className="bg-gradient-to-r from-slate-800 to-slate-600 text-white p-3 rounded-lg">
               <User className="h-6 w-6" />
             </div>
-            <span className="text-2xl font-bold text-slate-800">MarketHub</span>
+            <span className="text-2xl font-bold text-slate-800">BHP</span>
           </Link>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Create Customer Account</h1>
         </div>

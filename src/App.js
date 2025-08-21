@@ -1,16 +1,20 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/HomePage/Home";
 import SellerLogin from "./pages/auth/SellerLogin";
 import SellerSignup from "./pages/auth/SellerSignup";
-import SellerSignupStep2 from "./pages/auth/sellerSignUp2";
+import SellerSignupStep2 from "./pages/auth/CreateStore";
 import CustomerLogin from "./pages/auth/CustomerLogin";
 import CustomerSignup from "./pages/auth/CustomerSignup";
 import Dashboard from "./pages/seller/Dashboard";
-import { AuthProvider } from './components/context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import AddProduct from "./pages/seller/AddProduct";
 import ViewStore from "./pages/viewStore";
+import CreateStore from "./pages/auth/CreateStore";
+import ViewProduct from "./pages/productsDetail";
+import OrderDetails from "./pages/seller/OrderDetail";
+import MyOrder from "./pages/customer/MyOrders";
 
 function App() {
   return (
@@ -23,10 +27,14 @@ function App() {
           <Route path="/customer/signup" element={<CustomerSignup />} />
           <Route path="/seller/login" element={<SellerLogin />} />
           <Route path="/seller/signup" element={<SellerSignup />} />
-          <Route path="/seller/signup/step2" element={<SellerSignupStep2 />} />
+          <Route path="/seller/CreateStore" element={<CreateStore />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/AddProduct" element={<AddProduct />} />
+          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="/addproduct/:storeId" element={<AddProduct />} />
           <Route path="/dashboard/store/:storeId" element={<ViewStore />} />
+          <Route path="/viewproduct/:productId" element={<ViewProduct />} />
+          <Route path="/orders/:storeId" element={<OrderDetails />} />
+          <Route path="/MyOrders/:id" element={<MyOrder />} />
 
         </Routes>
         </AuthProvider>

@@ -28,7 +28,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { useToast } from '../hooks/use-toast';
 
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
+const BASE_URL = 'http://localhost:5000';
 
 const ViewStore = () => {
   const navigate = useNavigate();
@@ -43,8 +43,8 @@ const ViewStore = () => {
     // Priority 2: Navigation state
     if (location.state?.storeId) return location.state.storeId;
     
-    // Priority 3: localStorage
-    const currentStoreId = localStorage.getItem('currentStoreId');
+    // Priority 3: sessionStorage (changed from localStorage to avoid storage issues)
+    const currentStoreId = sessionStorage.getItem('currentStoreId');
     if (currentStoreId) return currentStoreId;
     
     return null;
@@ -171,7 +171,7 @@ const ViewStore = () => {
   // Calculate store stats
   const storeStats = useMemo(() => {
     const totalProducts = products.length;
-    const inStockProducts = products.filter(p => p.in_stock).length;
+    const inStockProducts = products.filter(p => p.quantity > 0).length; // Changed from p.in_stock
     const averagePrice = products.length > 0 
       ? (products.reduce((sum, p) => sum + (p.sale_price || p.price || 0), 0) / products.length).toFixed(2)
       : '0.00';
@@ -189,23 +189,39 @@ const ViewStore = () => {
     };
   }, [products]);
 
-  // Handle image error for base64 images
-  const handleImageError = (e, product) => {
-    console.error('Image failed to load for product:', product.name);
-    e.target.src = '/api/placeholder/300/200';
-  };
-
-  // Get product image (handle base64 and regular URLs)
+  // Get product image - Updated to handle the new API structure
   const getProductImage = (product) => {
-    if (!product.image || product.image.length === 0) {
-      return '/api/placeholder/300/200';
+    // Check if product has images array and it's not empty
+    if (!product.images || !Array.isArray(product.images) || product.images.length === 0) {
+      return 'https://via.placeholder.com/300x200?text=No+Image';
     }
     
-    // If it's an array, get the first image
-    const imageUrl = Array.isArray(product.image) ? product.image[0] : product.image;
+    // Get the first image from the array
+    const imageUrl = product.images[0];
     
-    // If it's base64 or a regular URL, return as is
-    return imageUrl || '/api/placeholder/300/200';
+    // Handle base64 images
+    if (imageUrl && imageUrl.startsWith('data:image/')) {
+      return imageUrl;
+    }
+    
+    // Handle regular URLs
+    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('/'))) {
+      return imageUrl;
+    }
+    
+    // Fallback to placeholder
+    return 'https://via.placeholder.com/300x200?text=No+Image';
+  };
+
+  // Handle image error
+  const handleImageError = (e, product) => {
+    console.error('Image failed to load for product:', product.name);
+    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
+  };
+
+  // Check if product is in stock
+  const isInStock = (product) => {
+    return product.quantity > 0;
   };
 
   if (loading) {
@@ -262,6 +278,9 @@ const ViewStore = () => {
                   src={store.banner}
                   alt="Store banner"
                   className="w-full h-full object-cover rounded-t-lg"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/800x200?text=Store+Banner';
+                  }}
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 rounded-t-lg"></div>
               </div>
@@ -276,6 +295,9 @@ const ViewStore = () => {
                       src={store.logo}
                       alt="Store logo"
                       className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg border-4 border-white shadow-lg"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/128x128?text=Logo';
+                      }}
                     />
                   </div>
                 ) : (
@@ -498,7 +520,7 @@ const ViewStore = () => {
                     )}
                     
                     {/* Stock Status */}
-                    {!product.in_stock && (
+                    {!isInStock(product) && (
                       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-t-lg">
                         <Badge variant="secondary" className="bg-red-500 text-white">
                           Out of Stock
@@ -562,7 +584,7 @@ const ViewStore = () => {
 
                       {/* Stock Info */}
                       <div className="text-xs text-slate-500">
-                        {product.in_stock ? (
+                        {isInStock(product) ? (
                           `${product.quantity} in stock`
                         ) : (
                           'Out of stock'
@@ -574,7 +596,7 @@ const ViewStore = () => {
                         <Button 
                           size="sm" 
                           className="w-full bg-slate-800 hover:bg-slate-900"
-                          disabled={!product.in_stock}
+                          disabled={!isInStock(product)}
                         >
                           <Eye className="h-4 w-4 mr-2" />
                           View Product

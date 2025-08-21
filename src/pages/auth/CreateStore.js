@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Store, Upload, X, Building } from 'lucide-react';
+import { Store, Upload, X, Building, Key, User, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
@@ -8,7 +8,8 @@ import { Label } from '../../components/ui/label';
 import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
+
+const BASE_URL = 'http://localhost:5000';
 
 const CreateStore = () => {
   const [formData, setFormData] = useState({
@@ -24,27 +25,142 @@ const CreateStore = () => {
     store_logo: null,
     store_banner: null
   });
+  const [ContactInfo, setContactInfo] = useState({
+    phone: '',
+    email: ''
+  });
+  const [socialLinks, setSocialLinks] = useState({
+    facebook: '',
+    instagram: '',
+    twitter: ''
+  });
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [seller, setSeller] = useState(null);
+  const [token, setToken] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get seller data from previous step
-  const seller = location.state?.seller;
-
   useEffect(() => {
-    // Redirect if no seller data
-    if (!seller) {
-      toast({
-        title: "Session Expired",
-        description: "Please complete step 1 first.",
-        variant: "destructive",
-      });
-      navigate('/seller/signup');
-      return;
-    }
+    const initializeSellerData = () => {
+      console.log('Location state:', location.state);
+      
+      let sellerData = null;
+      let authToken = null;
+
+      // Priority 1: From location state (navigation from previous step)
+      if (location.state?.seller) {
+        sellerData = location.state.seller;
+        authToken = location.state.token;
+        console.log('✓ Got seller from location state:', sellerData);
+      }
+      
+      // Priority 2: From sessionStorage (more reliable than localStorage)
+      if (!sellerData) {
+        try {
+          const storedSeller = sessionStorage.getItem('seller');
+          const storedToken = sessionStorage.getItem('token');
+          
+          if (storedSeller) {
+            sellerData = JSON.parse(storedSeller);
+            authToken = storedToken;
+            console.log('✓ Got seller from sessionStorage:', sellerData);
+          }
+        } catch (error) {
+          console.error('Error parsing sessionStorage seller data:', error);
+        }
+      }
+
+      // Priority 3: From localStorage as fallback
+      if (!sellerData) {
+        try {
+          const storedSeller = localStorage.getItem('seller');
+          const storedToken = localStorage.getItem('token');
+          
+          if (storedSeller) {
+            sellerData = JSON.parse(storedSeller);
+            authToken = storedToken;
+            console.log('✓ Got seller from localStorage:', sellerData);
+          }
+        } catch (error) {
+          console.error('Error parsing localStorage seller data:', error);
+        }
+      }
+
+      // Priority 4: From user data as last resort
+      if (!sellerData) {
+        try {
+          const userData = localStorage.getItem('user');
+          if (userData) {
+            const parsedUser = JSON.parse(userData);
+            // Check if this user data has seller properties
+            if (parsedUser._id || parsedUser.id) {
+              sellerData = parsedUser;
+              authToken = localStorage.getItem('token');
+              console.log('✓ Got seller from user data:', sellerData);
+            }
+          }
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+        }
+      }
+
+      // Debug logging
+     
+      // Validate seller data - check for both _id and id fields
+      const sellerId = sellerData?._id || sellerData?.id;
+      console.log('🔍 Final seller ID:', sellerId);
+      
+      if (!sellerData || !sellerId) {
+        console.error('❌ No valid seller data found - sellerData:', !!sellerData, 'sellerId:', sellerId);
+        toast({
+          title: "Session Expired",
+          description: "Please complete seller registration first.",
+          variant: "destructive",
+        });
+        navigate('/seller/signup');
+        return;
+      }
+
+      // Validate seller data structure
+      if (!sellerData.name || !sellerData.email) {
+        console.error('❌ Incomplete seller data - name:', sellerData.name, 'email:', sellerData.email);
+        toast({
+          title: "Invalid Session Data",
+          description: "Please complete seller registration again.",
+          variant: "destructive",
+        });
+        navigate('/seller/signup');
+        return;
+      }
+
+      // Normalize seller data to use _id field consistently
+      if (sellerData.id && !sellerData._id) {
+        sellerData._id = sellerData.id;
+        console.log('✓ Normalized seller data - added _id field');
+      }
+
+      // Set seller and token state
+      setSeller(sellerData);
+      setToken(authToken);
+      setIsInitialized(true);
+      
+      console.log('✓ Final seller data:', sellerData);
+      console.log('✓ Final token:', authToken);
+
+      // Store in sessionStorage for reliability
+      try {
+        sessionStorage.setItem('seller', JSON.stringify(sellerData));
+        if (authToken) {
+          sessionStorage.setItem('token', authToken);
+        }
+      } catch (error) {
+        console.warn('Could not save to sessionStorage:', error);
+      }
+    };
 
     // Set default categories
     setCategories([
@@ -64,11 +180,32 @@ const CreateStore = () => {
       "Jewelry & Accessories",
       "Other"
     ]);
-  }, [seller, navigate, toast]);
+
+    // Initialize seller data
+    initializeSellerData();
+  }, [location.state, navigate, toast]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Fixed: Changed 'phone' to 'name' to properly destructure the event target
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
+    setContactInfo(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // New handler for social media links
+  const handleSocialChange = (e) => {
+    const { name, value } = e.target;
+    setSocialLinks(prev => ({
       ...prev,
       [name]: value
     }));
@@ -152,7 +289,22 @@ const CreateStore = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validation
+    // Double-check seller data before submission - check for both _id and id
+    const sellerId = seller?._id || seller?.id;
+    if (!seller || !sellerId) {
+      console.error('❌ No seller data at submission time');
+      toast({
+        title: "Session Error",
+        description: "Seller information is missing. Please try again.",
+        variant: "destructive",
+      });
+      navigate('/seller/signup');
+      return;
+    }
+
+    console.log('✓ Submitting with seller ID:', sellerId);
+    
+    // Form validation
     if (!formData.store_name.trim()) {
       toast({
         title: "Store name required",
@@ -194,10 +346,19 @@ const CreateStore = () => {
     try {
       // Prepare the request body
       const requestBody = {
-        name: formData.store_name,
+        name: formData.store_name.trim(),
         category: formData.store_category,
-        description: formData.store_description,
-        user_id: seller._id
+        description: formData.store_description.trim(),
+        contactInfo: {
+          phone: ContactInfo.phone.trim(),
+          email: ContactInfo.email.trim()
+        },
+        socialLinks: {
+          facebook: socialLinks.facebook.trim(),
+          instagram: socialLinks.instagram.trim(),
+          twitter: socialLinks.twitter.trim()
+        },
+        user_id: sellerId // Use the normalized seller ID
       };
 
       // Add base64 encoded images if available
@@ -209,43 +370,81 @@ const CreateStore = () => {
         requestBody.banner = files.store_banner;
       }
 
-      console.log('Request Body:', requestBody);
+      console.log('📤 Sending request:', {
+        ...requestBody,
+        logo: files.store_logo ? '[BASE64_DATA]' : null,
+        banner: files.store_banner ? '[BASE64_DATA]' : null
+      });
 
-      const response = await fetch(`${BASE_URL}/api/store`, {
+      // Create headers
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+      
+      // Add Authorization header if token is available
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      console.log('📤 Request headers:', headers);
+      
+      const response = await fetch(`${BASE_URL}/api/stores`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(requestBody)
       });
 
+      console.log('📥 Response status:', response.status);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.text();
+        console.error('❌ API Error:', errorData);
+        
+        // Try to parse as JSON for better error handling
+        let errorMessage = errorData;
+        try {
+          const errorJson = JSON.parse(errorData);
+          errorMessage = errorJson.message || errorJson.error || errorData;
+        } catch (parseError) {
+          // Keep original error text if not JSON
+        }
+        
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();
-      console.log('Store creation response:', result);
+      console.log('✅ Store creation response:', result);
 
-      // Extract store ID from the response
-      const storeId = result.store?._id;
-      console.log('Store ID:', storeId);
+      // Extract store ID from response
+      const storeId = result.store?._id || result.data?._id || result._id || result.storeId;
+      console.log('✅ Store ID:', storeId);
+      
       if (!storeId) {
-        throw new Error('Store ID not found in response');
+        console.error('❌ No store ID in response:', result);
+        throw new Error('Store was created but ID not returned');
       }
 
       // Update seller data with store information
       const updatedSeller = {
         ...seller,
         storeId: storeId,
-        store: result.store
+        store: result.store || result.data || result
       };
       
-      // Store updated seller data in localStorage
+      // Store updated data
       try {
         localStorage.setItem('seller', JSON.stringify(updatedSeller));
+        localStorage.setItem('user', JSON.stringify(updatedSeller));
         localStorage.setItem('currentStoreId', storeId);
+        sessionStorage.setItem('seller', JSON.stringify(updatedSeller));
+        sessionStorage.setItem('currentStoreId', storeId);
+        
+        if (token) {
+          localStorage.setItem('token', token);
+          sessionStorage.setItem('token', token);
+        }
       } catch (storageError) {
-        console.warn('Could not save to localStorage:', storageError);
+        console.warn('Storage warning:', storageError);
       }
       
       toast({
@@ -253,37 +452,44 @@ const CreateStore = () => {
         description: `Welcome to MarketHub, ${seller.name}! Your store "${formData.store_name}" is ready.`
       });
       
-      // Navigate to dashboard with store ID
+      // Navigate to dashboard with all necessary data
       navigate('/dashboard', { 
         state: { 
           storeId: storeId,
-          seller: updatedSeller 
-        }
+          seller: updatedSeller,
+          token: token
+        },
+        replace: true // Replace current history entry
       });
 
     } catch (error) {
-      console.error('Store setup error:', error);
+      console.error('❌ Store setup error:', error);
       
       // Handle specific error cases
-      if (error.message?.includes('store name already exists')) {
-        toast({
-          title: "Store Name Taken",
-          description: "A store with this name already exists. Please choose a different store name.",
-          variant: "destructive"
-        });
-      } else if (error.message?.includes('HTTP error')) {
-        toast({
-          title: "Server Error",
-          description: "The server returned an error. Please try again.",
-          variant: "destructive"
-        });
-      } else {
-        toast({
-          title: "Connection Error",
-          description: "Unable to connect to the server. Please try again.",
-          variant: "destructive"
-        });
+      let errorTitle = "Setup Error";
+      let errorDescription = "Unable to create your store. Please try again.";
+      
+      if (error.message?.toLowerCase().includes('name') && error.message?.toLowerCase().includes('exists')) {
+        errorTitle = "Store Name Taken";
+        errorDescription = "A store with this name already exists. Please choose a different store name.";
+      } else if (error.message?.toLowerCase().includes('unauthorized')) {
+        errorTitle = "Authentication Error";
+        errorDescription = "Your session has expired. Please sign up again.";
+        // Redirect to signup after showing error
+        setTimeout(() => navigate('/seller/signup'), 2000);
+      } else if (error.message?.toLowerCase().includes('network') || error.message?.toLowerCase().includes('fetch')) {
+        errorTitle = "Connection Error";
+        errorDescription = "Unable to connect to the server. Please check your internet connection and try again.";
+      } else if (error.message?.includes('500')) {
+        errorTitle = "Server Error";
+        errorDescription = "The server is experiencing issues. Please try again in a few minutes.";
       }
+      
+      toast({
+        title: errorTitle,
+        description: errorDescription,
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
@@ -294,6 +500,15 @@ const CreateStore = () => {
       store_name: "Tech World",
       store_category: "Electronics",
       store_description: "Best gadgets and electronics in town. We offer the latest technology products with competitive prices and excellent customer service."
+    });
+    setContactInfo({
+      phone: "+1-555-0123",
+      email: "contact@techworld.com"
+    });
+    setSocialLinks({
+      facebook: "https://facebook.com/techworld",
+      instagram: "https://instagram.com/techworld",
+      twitter: "https://twitter.com/techworld"
     });
   };
 
@@ -306,13 +521,13 @@ const CreateStore = () => {
       .trim();
   };
 
-  // Show loading or redirect state
-  if (!seller) {
+  // Show loading while initializing
+  if (!isInitialized || !seller) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-slate-800 mx-auto mb-4"></div>
-          <p className="text-slate-600">Redirecting...</p>
+          <p className="text-slate-600">Loading seller information...</p>
         </div>
       </div>
     );
@@ -403,6 +618,100 @@ const CreateStore = () => {
                 <p className="text-xs text-slate-500 mt-1">
                   {formData.store_description.length}/20 characters minimum
                 </p>
+              </div>
+
+              {/* Contact Information Section */}
+              <div className="space-y-4">
+                <h3 className="text-sm font-medium text-slate-700 border-b border-slate-200 pb-2">
+                  Store Contact Information
+                </h3>
+                
+                <div>
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={ContactInfo.phone}
+                      onChange={handleContactChange}
+                      className="pl-10"
+                      placeholder="Enter your store phone number"
+                    />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="email">Store Email</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={ContactInfo.email}
+                      onChange={handleContactChange}
+                      className="pl-10"
+                      placeholder="Enter your store email"
+                    />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media Links Section (Optional) */}
+              <div className="space-y-4">
+                <h3 className="text-sm font-medium text-slate-700 border-b border-slate-200 pb-2">
+                  Social Media Links (Optional)
+                </h3>
+                
+                <div>
+                  <Label htmlFor="facebook">Facebook Page</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="facebook"
+                      name="facebook"
+                      type="url"
+                      value={socialLinks.facebook}
+                      onChange={handleSocialChange}
+                      className="pl-10"
+                      placeholder="https://facebook.com/yourstore"
+                    />
+                    <Facebook className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="instagram">Instagram Profile</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="instagram"
+                      name="instagram"
+                      type="url"
+                      value={socialLinks.instagram}
+                      onChange={handleSocialChange}
+                      className="pl-10"
+                      placeholder="https://instagram.com/yourstore"
+                    />
+                    <Instagram className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="twitter">Twitter/X Profile</Label>
+                  <div className="relative mt-1">
+                    <Input
+                      id="twitter"
+                      name="twitter"
+                      type="url"
+                      value={socialLinks.twitter}
+                      onChange={handleSocialChange}
+                      className="pl-10"
+                      placeholder="https://twitter.com/yourstore"
+                    />
+                    <Twitter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  </div>
+                </div>
               </div>
 
               {/* File Uploads */}

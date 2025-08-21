@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, Package, DollarSign, Image, Tag, FileText, Upload, X, Calendar } from 'lucide-react';
+import { useNavigate, Link, useLocation, useParams } from 'react-router-dom';
+import { ArrowLeft, Package, DollarSign, Tag, FileText, Upload, X, Calendar } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
@@ -9,8 +9,9 @@ import { Textarea } from '../../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
-// Fallback categories if import fails
+
+const BASE_URL = 'http://localhost:5000';
+
 const categories = [
   'Electronics',
   'Clothing',
@@ -27,52 +28,37 @@ const categories = [
 const AddProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { storeId: urlStoreId } = useParams();
+  const { toast } = useToast();
   
-  // Get store ID from navigation state or fallback sources
+  // Get store ID and token from navigation state or fallback sources
   const getStoreId = () => {
-    // Priority 1: From navigation state (when coming from dashboard)
-    if (location.state?.storeId) {
-      console.log('Using store ID from navigation state:', location.state.storeId);
-      return location.state.storeId;
-    }
+    if (urlStoreId) return urlStoreId;
+    if (location.state?.storeId) return location.state.storeId;
     
-    // Priority 2: From localStorage
     const currentStoreId = localStorage.getItem('currentStoreId');
-    if (currentStoreId) {
-      console.log('Using store ID from localStorage:', currentStoreId);
-      return currentStoreId;
-    }
+    if (currentStoreId) return currentStoreId;
     
-    // Priority 3: From user/seller data in localStorage
     try {
       const userData = localStorage.getItem('user');
-      const sellerData = localStorage.getItem('seller');
-      
       if (userData) {
         const user = JSON.parse(userData);
-        if (user.store_id || user.storeId) {
-          console.log('Using store ID from user data:', user.store_id || user.storeId);
-          return user.store_id || user.storeId;
-        }
-      }
-      
-      if (sellerData) {
-        const seller = JSON.parse(sellerData);
-        if (seller.storeId || seller.store?._id) {
-          console.log('Using store ID from seller data:', seller.storeId || seller.store?._id);
-          return seller.storeId || seller.store?._id;
-        }
+        if (user.storeId) return user.storeId;
       }
     } catch (error) {
-      console.error('Error parsing user/seller data:', error);
+      // Silent error handling
     }
     
-    // Priority 4: Fallback ID (you should replace this with actual logic)
-    console.warn('No store ID found, using fallback');
-    return "688e040bc4b849772018449e"; // Your fallback store ID
+    return null;
+  };
+
+  const getAuthToken = () => {
+    if (location.state?.token) return location.state.token;
+    return localStorage.getItem('token');
   };
 
   const storeId = getStoreId();
+  const authToken = getAuthToken();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -81,43 +67,25 @@ const AddProduct = () => {
     sale_price: '',
     saleEndingDate: '',
     category: '',
-    images: [], // Changed to array for multiple images
-    in_stock: true,
+    images: [], // Array of base64 strings to match backend schema
     quantity: ''
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [imageFiles, setImageFiles] = useState([]);
   
-  // Get user from localStorage directly
-  let user = null;
-  try {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      user = JSON.parse(userData);
-    }
-  } catch (error) {
-    console.error('Failed to get user data:', error);
-  }
-
-  // Safe toast hook usage
-  let toast = null;
-  try {
-    const toastHook = useToast();
-    toast = toastHook.toast;
-  } catch (error) {
-    console.error('Toast hook not available:', error);
-    toast = (message) => console.log('Toast:', message);
-  }
-
-  // Show error if no store ID is available
-  if (!storeId) {
+  // Show error if no store ID or token is available
+  if (!storeId || !authToken) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <Package className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-slate-900 mb-4">Store Not Found</h1>
+          <h1 className="text-2xl font-bold text-slate-900 mb-4">
+            {!storeId ? 'Store Not Found' : 'Authentication Required'}
+          </h1>
           <p className="text-slate-600 mb-6">
-            Unable to determine which store to add the product to. Please go back to your dashboard.
+            {!storeId 
+              ? 'Unable to determine which store to add the product to. Please go back to your dashboard.'
+              : 'Authentication token is missing. Please log in again.'
+            }
           </p>
           <Link to="/dashboard">
             <Button className="bg-slate-800 hover:bg-slate-900">
@@ -140,7 +108,7 @@ const AddProduct = () => {
     });
   };
 
-  // Handle image upload
+  // Handle image upload (multiple images)
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
@@ -148,41 +116,34 @@ const AddProduct = () => {
     try {
       const base64Images = await Promise.all(
         files.map(async (file) => {
-          if (file.size > 5 * 1024 * 1024) { // 5MB limit
+          if (file.size > 5 * 1024 * 1024) {
             throw new Error(`File ${file.name} is too large. Maximum size is 5MB.`);
           }
           return await convertToBase64(file);
         })
       );
 
-      setImageFiles(prev => [...prev, ...files]);
       setFormData(prev => ({
         ...prev,
         images: [...prev.images, ...base64Images]
       }));
 
-      if (toast) {
-        toast({
-          title: "Success",
-          description: `${files.length} image(s) uploaded successfully!`,
-          variant: "success"
-        });
-      }
+      toast({
+        title: "Success",
+        description: `${files.length} image(s) uploaded successfully!`,
+        variant: "success"
+      });
     } catch (error) {
-      console.error('Error uploading images:', error);
-      if (toast) {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive"
-        });
-      }
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      });
     }
   };
 
   // Remove image
   const removeImage = (index) => {
-    setImageFiles(prev => prev.filter((_, i) => i !== index));
     setFormData(prev => ({
       ...prev,
       images: prev.images.filter((_, i) => i !== index)
@@ -222,84 +183,82 @@ const AddProduct = () => {
       if (!formData.category) {
         throw new Error('Category is required');
       }
-      if (!formData.quantity || isNaN(formData.quantity) || parseInt(formData.quantity) <= 0) {
+      if (!formData.quantity || isNaN(formData.quantity) || parseInt(formData.quantity) < 0) {
         throw new Error('Valid quantity is required');
       }
       if (formData.images.length === 0) {
         throw new Error('At least one product image is required');
       }
       
-      // Validate store ID
-      if (!storeId) {
-        throw new Error('Store ID is required');
+      // Validate sale price if provided
+      if (formData.sale_price && parseFloat(formData.sale_price) >= parseFloat(formData.price)) {
+        throw new Error('Sale price must be less than regular price');
       }
       
-      // Get user data
-      const userData = user || JSON.parse(localStorage.getItem('user'));
-      if (!userData) {
-        throw new Error('Authentication required');
-      }
-
-      // Get auth token
-      const token = localStorage.getItem('token');
-
-      // Prepare API payload with the correct store ID
+      // Prepare API payload to match backend schema exactly
       const payload = {
         name: formData.name.trim(),
         description: formData.description.trim(),
         price: parseFloat(formData.price),
         sale_price: formData.sale_price ? parseFloat(formData.sale_price) : null,
         category: formData.category,
-        image: formData.images, // Array of base64 images
-        in_stock: formData.in_stock,
+        images: formData.images, // Array of base64 strings
         quantity: parseInt(formData.quantity),
-        store_id: storeId, // Use the store ID we determined above
+        store_id: storeId,
         saleEndingDate: formData.saleEndingDate ? new Date(formData.saleEndingDate).toISOString() : null
       };
-
-      console.log('Sending payload with store ID:', storeId, payload);
 
       // API Call
       const response = await fetch(`${BASE_URL}/api/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(token && { 'Authorization': `Bearer ${token}` })
+          'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify(payload)
       });
 
-      const result = await response.json();
-
       if (response.ok) {
-        // Success
-        if (toast) {
-          toast({
-            title: "Success",
-            description: "Product added successfully!",
-            variant: "success"
-          });
-        }
+        const result = await response.json();
+        toast({
+          title: "Success",
+          description: "Product added successfully!",
+          variant: "success"
+        });
         
-        // Navigate back to dashboard with store ID to ensure consistency
         navigate('/dashboard', { 
           state: { 
             storeId: storeId,
+            token: authToken,
             productAdded: true 
           } 
         });
       } else {
-        throw new Error(result.message || 'Failed to add product');
+        const result = await response.json();
+        if (response.status === 401) {
+          throw new Error('Authentication failed. Please log in again.');
+        } else if (response.status === 403) {
+          throw new Error('You do not have permission to add products to this store.');
+        } else if (response.status === 400) {
+          throw new Error(result.message || 'Invalid product data provided.');
+        } else {
+          throw new Error(result.message || `Server error: ${response.status}`);
+        }
       }
       
     } catch (error) {
-      console.error('Error adding product:', error);
-      if (toast) {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive"
-        });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      });
+      
+      // Handle authentication errors
+      if (error.message.includes('Authentication failed')) {
+        localStorage.removeItem('token');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
       }
     } finally {
       setIsLoading(false);
@@ -311,7 +270,7 @@ const AddProduct = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Link to="/dashboard" state={{ storeId: storeId }}>
+          <Link to="/dashboard" state={{ storeId: storeId, token: authToken }}>
             <Button variant="ghost" className="mb-4 text-slate-600 hover:text-slate-800">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Dashboard
@@ -321,10 +280,6 @@ const AddProduct = () => {
           <p className="text-slate-600">
             Add a new product to your store and start selling
           </p>
-          {/* Debug info - remove in production */}
-          <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-sm text-blue-700">
-            <strong>Store ID:</strong> {storeId}
-          </div>
         </div>
 
         {/* Form */}
@@ -348,6 +303,7 @@ const AddProduct = () => {
                         name="name"
                         type="text"
                         required
+                        maxLength={100}
                         value={formData.name}
                         onChange={handleChange}
                         className="pl-10"
@@ -364,12 +320,16 @@ const AddProduct = () => {
                         id="description"
                         name="description"
                         required
+                        maxLength={1000}
                         value={formData.description}
                         onChange={handleChange}
                         placeholder="Describe your product..."
                         rows={4}
                       />
                     </div>
+                    <p className="text-xs text-slate-500 mt-1">
+                      {formData.description.length}/1000 characters
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -388,7 +348,7 @@ const AddProduct = () => {
                           className="pl-10"
                           placeholder="0.00"
                         />
-                        {/* <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" /> */}
+                        <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                       </div>
                     </div>
 
@@ -455,23 +415,13 @@ const AddProduct = () => {
                         id="quantity"
                         name="quantity"
                         type="number"
-                        min="1"
+                        min="0"
                         required
                         value={formData.quantity}
                         onChange={handleChange}
                         placeholder="Enter quantity"
                       />
                     </div>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="in_stock"
-                      name="in_stock"
-                      checked={formData.in_stock}
-                      onCheckedChange={(checked) => setFormData(prev => ({ ...prev, in_stock: checked }))}
-                    />
-                    <Label htmlFor="in_stock">Product is in stock</Label>
                   </div>
                 </div>
 
@@ -534,10 +484,10 @@ const AddProduct = () => {
                           {formData.sale_price ? (
                             <>
                               <span className="text-xl font-bold text-red-600">
-                                {parseFloat(formData.sale_price).toFixed(2)}
+                                Rs.{parseFloat(formData.sale_price).toFixed(2)}
                               </span>
                               <span className="text-sm text-slate-500 line-through">
-                                {parseFloat(formData.price).toFixed(2)}
+                                Rs.{parseFloat(formData.price).toFixed(2)}
                               </span>
                               <span className="text-xs bg-red-500 text-white px-2 py-1 rounded">
                                 SALE
@@ -545,14 +495,14 @@ const AddProduct = () => {
                             </>
                           ) : (
                             <span className="text-xl font-bold text-slate-900">
-                              {parseFloat(formData.price).toFixed(2)}
+                              Rs.{parseFloat(formData.price).toFixed(2)}
                             </span>
                           )}
                         </div>
                         {formData.sale_price && (
                           <div className="mt-2">
                             <p className="text-sm text-green-600">
-                              Save {(parseFloat(formData.price) - parseFloat(formData.sale_price)).toFixed(2)}!
+                              Save Rs.{(parseFloat(formData.price) - parseFloat(formData.sale_price)).toFixed(2)}!
                             </p>
                             {formData.saleEndingDate && (
                               <p className="text-xs text-slate-500 mt-1">
@@ -569,7 +519,7 @@ const AddProduct = () => {
 
               {/* Submit Buttons */}
               <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 pt-6 border-t">
-                <Link to="/dashboard" state={{ storeId: storeId }}>
+                <Link to="/dashboard" state={{ storeId: storeId, token: authToken }}>
                   <Button type="button" variant="outline" className="w-full sm:w-auto">
                     Cancel
                   </Button>

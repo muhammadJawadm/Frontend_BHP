@@ -7,12 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
-const BASE_URL = process.env.BASE_URL || 'https://backend-bhp.onrender.com';
+
+const BASE_URL = 'http://localhost:5000';
 
 const SellerSignup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phoneNo: '',
     password: '',
     confirmPassword: ''
   });
@@ -52,6 +54,15 @@ const SellerSignup = () => {
       });
       return;
     }
+    
+    if (formData.phoneNo.length < 11) {
+      toast({
+        title: "Phone Number too short",
+        description: "Phone Number must be at least 11 characters long.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (!agreeToTerms) {
       toast({
@@ -65,33 +76,52 @@ const SellerSignup = () => {
     setIsLoading(true);
     
     try {
+      const requestBody = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phoneNo, // Make sure this matches your API expectation
+        password: formData.password
+      };
+
+      console.log('Sending request:', requestBody); // Debug log
+
       const response = await fetch(`${BASE_URL}/api/seller/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password
-        })
+        body: JSON.stringify(requestBody)
       });
 
-      const result = await response.json();
+      console.log('Response status:', response.status); // Debug log
 
-      if (response.ok && result.seller) {
+      const result = await response.json();
+      console.log('Response data:', result); // Debug log
+
+      // Check for success based on your API response structure
+      if (response.ok && result.success) {
+        // Store token and seller data in localStorage for the next step
+        try {
+          localStorage.setItem('sellerToken', result.token);
+          localStorage.setItem('sellerData', JSON.stringify(result.seller));
+        } catch (storageError) {
+          console.warn('Could not save to localStorage:', storageError);
+        }
+
         toast({
           title: "Account Created!",
-          description: "Proceeding to store setup...",
+          description: result.message || "Proceeding to store setup...",
         });
         
-        // Navigate to step 2 with seller data
-        navigate('/seller/signup/step2', {
+        // Navigate to step 2 with seller data and token
+        navigate('/seller/createStore', {
           state: {
-            seller: result.seller
+            seller: result.seller,
+            token: result.token
           }
         });
       } else {
+        // Handle error response
         toast({
           title: "Registration Failed",
           description: result.message || "An error occurred during registration.",
@@ -112,10 +142,11 @@ const SellerSignup = () => {
 
   const fillDemoData = () => {
     setFormData({
-      name: 'Tech Seller',
-      email: 'seller@tech.com',
-      password: 'sellerpass',
-      confirmPassword: 'sellerpass'
+      name: 'John Smith 121',
+      email: 'john1d21@business.com',
+      phoneNo: '+1234567890',
+      password: 'Password123',
+      confirmPassword: 'Password123'
     });
     setAgreeToTerms(true);
   };
@@ -186,6 +217,24 @@ const SellerSignup = () => {
                     placeholder="Enter your email"
                   />
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="phoneNo">Phone Number</Label>
+                <div className="relative mt-1">
+                  <Input
+                    id="phoneNo"
+                    name="phoneNo"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    value={formData.phoneNo}
+                    onChange={handleChange}
+                    className="pl-10"
+                    placeholder="Enter your phone number"
+                  />
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                 </div>
               </div>
 
