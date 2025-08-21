@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,Link } from 'react-router-dom';
 import { 
   ShoppingCart, 
   Heart, 
@@ -245,9 +245,11 @@ const OrderSuccessModal = ({ isOpen, onClose, orderData }) => {
           <Download className="h-4 w-4 mr-2" />
           Download Receipt
         </Button>
-        <Button onClick={onClose} className="flex-1">
-          Close
-        </Button>
+        <Link to="/">
+          <Button onClick={onClose} className="flex-1">
+            Close
+          </Button>
+        </Link>
       </div>
     </Modal>
   );
