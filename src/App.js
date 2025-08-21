@@ -15,6 +15,7 @@ import CreateStore from "./pages/auth/CreateStore";
 import ViewProduct from "./pages/productsDetail";
 import OrderDetails from "./pages/seller/OrderDetail";
 import MyOrder from "./pages/customer/MyOrders";
+import ProductByCategory from "./pages/customer/ProductByCategory";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/viewproduct/:productId" element={<ViewProduct />} />
           <Route path="/orders/:storeId" element={<OrderDetails />} />
           <Route path="/MyOrders/:id" element={<MyOrder />} />
+          <Route path="/products/category/:category" element={<ProductByCategory />} />
 
         </Routes>
         </AuthProvider>
