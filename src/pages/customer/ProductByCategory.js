@@ -9,7 +9,7 @@ const ProductByCategory = () => {
   const [pagination, setPagination] = useState(null);
   const [useMockData, setUseMockData] = useState(false);
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
 
   // Mock data for testing
@@ -81,7 +81,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:500
       setError(null);
       console.log(`Fetching products for category: ${category}`);
       // Update this URL to match your actual API endpoint
-      const apiUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/products?category=${encodeURIComponent(category)}`;
+      const apiUrl = `${REACT_APP_API_URL}/api/products?category=${encodeURIComponent(category)}`;
       
       console.log('Fetching from:', apiUrl); // Debug log
       
