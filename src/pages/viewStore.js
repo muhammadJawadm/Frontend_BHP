@@ -245,7 +245,7 @@ const ViewStore = () => {
           <p className="text-slate-600 mb-6">
             {error || 'The store you are looking for does not exist.'}
           </p>
-          <Link to="/dashboard">
+          <Link to="/">
             <Button className="bg-slate-800 hover:bg-slate-900">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Dashboard
@@ -261,7 +261,7 @@ const ViewStore = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Link to="/dashboard" state={{ storeId: storeId }}>
+          <Link to="/" state={{ storeId: storeId }}>
             <Button variant="ghost" className="mb-4 text-slate-600 hover:text-slate-800">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Dashboard
