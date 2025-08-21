@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Package, MapPin, Calendar, CreditCard, Truck, Clock, AlertCircle } from 'lucide-react';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
 const MyOrder = () => {
   // Extract user ID from URL path
@@ -19,7 +20,7 @@ const MyOrder = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
+        const response = await fetch(`${REACT_APP_API_URL}/api/orders/user/${userId}`);
         const result = await response.json();
         
         if (result.success) {

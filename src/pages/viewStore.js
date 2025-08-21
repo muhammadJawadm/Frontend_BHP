@@ -27,8 +27,9 @@ import { Badge } from '../components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { useToast } from '../hooks/use-toast';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = REACT_APP_API_URL;
 
 const ViewStore = () => {
   const navigate = useNavigate();

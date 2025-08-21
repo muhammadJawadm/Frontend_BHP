@@ -10,8 +10,9 @@ import ProductCard from './ProductCard';
 import Categories from './Categories';
 import Features from './Features';
 import Footer from './Footer';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = REACT_APP_API_URL;
 
 const Homepage = () => {
   const [products, setProducts] = useState([]);

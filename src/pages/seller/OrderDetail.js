@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Package, User, CreditCard, Truck, MapPin, Phone, Calendar, DollarSign, ArrowLeft } from 'lucide-react';
 import { useParams } from 'react-router-dom';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
+
 
 const OrderDetails = () => {
   // Simulating route params - in real app, this would come from useParams()
@@ -23,7 +25,7 @@ const OrderDetails = () => {
     try {
       setLoading(true);
       console.log(`Fetching orders for store ID: ${storeId}`);
-      const response = await fetch(`http://localhost:5000/api/orders/store/${storeId}`);
+      const response = await fetch(`${REACT_APP_API_URL}/api/orders/store/${storeId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -42,7 +44,7 @@ const OrderDetails = () => {
   const updateOrderStatus = async (orderId, orderStatus, trackingNumber = null) => {
     try {
       setUpdating({ orderId, type: 'order' });
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+      const response = await fetch(`${REACT_APP_API_URL}/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +76,7 @@ const OrderDetails = () => {
   const updatePaymentStatus = async (orderId, paymentStatus) => {
     try {
       setUpdating({ orderId, type: 'payment' });
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/payment`, {
+      const response = await fetch(`${REACT_APP_API_URL}/api/orders/${orderId}/payment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

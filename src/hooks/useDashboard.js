@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { get } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = REACT_APP_API_URL;
 
 export const useDashboard = () => {
   const location = useLocation();

@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = REACT_APP_API_URL;
 
 const SellerSignup = () => {
   const [formData, setFormData] = useState({

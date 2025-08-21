@@ -9,6 +9,9 @@ const ProductByCategory = () => {
   const [pagination, setPagination] = useState(null);
   const [useMockData, setUseMockData] = useState(false);
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+
   // Mock data for testing
   const mockData = {
     success: true,

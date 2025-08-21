@@ -6,6 +6,7 @@ import { Button } from '../components/ui/button';
 import { Separator } from '../components/ui/separator';
 import { Badge } from '../components/ui/badge';
 import { useToast } from '../hooks/use-toast';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -24,8 +25,8 @@ const OrderDetails = () => {
         if (!token) {
           throw new Error('Authentication token not found');
         }
-        
-        const response = await fetch(`https://backend-bhp.onrender.com/api/orders/${orderId}`, {
+
+        const response = await fetch(`${REACT_APP_API_URL}/api/orders/${orderId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -77,7 +78,7 @@ const OrderDetails = () => {
   // Function to handle order cancellation
   const handleCancelOrder = async () => {
     try {
-      const response = await fetch(`https://backend-bhp.onrender.com/api/orders/${orderId}/cancel`, {
+      const response = await fetch(`${REACT_APP_API_URL}/api/orders/${orderId}/cancel`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

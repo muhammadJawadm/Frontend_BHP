@@ -269,8 +269,9 @@ const BuyNowPage = ({ product, quantity, onBack }) => {
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderResponse, setOrderResponse] = useState(null);
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
 
-  const BASE_URL = 'http://localhost:5000';
+  const BASE_URL = REACT_APP_API_URL;
 
   const paymentMethods = [
     'Cash on Delivery',
@@ -634,8 +635,8 @@ const ViewProduct = () => {
 
   const { productId } = useParams();
   const navigate = useNavigate();
-
-  const BASE_URL = 'http://localhost:5000';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
+  const BASE_URL = REACT_APP_API_URL;
 
   useEffect(() => {
     if (productId) {

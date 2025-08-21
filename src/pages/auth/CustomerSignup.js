@@ -8,6 +8,9 @@ import { Label } from '../../components/ui/label';
 import { Checkbox } from '../../components/ui/checkbox';
 import { useToast } from '../../hooks/use-toast';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com/';
+
+
 const CustomerSignup = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -63,7 +66,7 @@ const CustomerSignup = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch(`${REACT_APP_API_URL}api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
