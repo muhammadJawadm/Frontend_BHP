@@ -101,8 +101,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-1">Email Us</h3>
-                  <p className="text-slate-600">support@markethub.com</p>
-                  <p className="text-slate-600">info@markethub.com</p>
+                  <p className="text-slate-600">support@HBP.com</p>
+                  <p className="text-slate-600">info@HBP.com</p>
                 </div>
               </div>
               
@@ -138,7 +138,7 @@ const Contact = () => {
                 {['facebook', 'twitter', 'instagram', 'linkedin'].map((social) => (
                   <a 
                     key={social}
-                    href={`https://${social}.com/markethub`}
+                    href={`https://${social}.com/BHP`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-slate-100 hover:bg-slate-200 p-2 rounded-full"
@@ -265,7 +265,7 @@ const Contact = () => {
             <iframe 
               title="MarketHub Office Location"
               className="w-full h-[400px] rounded-lg border border-slate-200"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50470.68994085393!2d-122.43300991774757!3d37.77493706850806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858080a379575d%3A0x6fcd18536592a403!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1691175624413!5m2!1sen!2sus" 
+              // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50470.68994085393!2d-122.43300991774757!3d37.77493706850806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858080a379575d%3A0x6fcd18536592a403!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1691175624413!5m2!1sen!2sus" 
               allowFullScreen="" 
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -281,12 +281,12 @@ const Contact = () => {
         <div className="space-y-4">
           {[
             {
-              question: "How do I become a seller on MarketHub?",
+              question: "How do I become a seller on BHP?",
               answer: "To become a seller, click on 'Seller Signup' in the navigation menu, complete the registration form, and follow the verification process. Once approved, you can start adding products to your store."
             },
             {
               question: "What payment methods are accepted?",
-              answer: "MarketHub accepts credit cards, PayPal, and Apple Pay. We're working on adding more payment options in the future to accommodate all our customers."
+              answer: "BHP accepts credit cards, COD, and Debit Cart. We're working on adding more payment options in the future to accommodate all our customers."
             },
             {
               question: "How long does shipping take?",

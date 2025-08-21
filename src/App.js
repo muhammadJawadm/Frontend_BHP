@@ -16,6 +16,9 @@ import ViewProduct from "./pages/productsDetail";
 import OrderDetails from "./pages/seller/OrderDetail";
 import MyOrder from "./pages/customer/MyOrders";
 import ProductByCategory from "./pages/customer/ProductByCategory";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import ShippingForm from "./pages/checkout/ShippingForm";
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
           <Route path="/orders/:storeId" element={<OrderDetails />} />
           <Route path="/MyOrders/:id" element={<MyOrder />} />
           <Route path="/products/category/:category" element={<ProductByCategory />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Contact" element={<Contact />} />
+          {/* <Route path="/Shipping" element={<ShippingForm />} /> */}
 
         </Routes>
         </AuthProvider>

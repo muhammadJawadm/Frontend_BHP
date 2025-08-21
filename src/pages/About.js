@@ -13,11 +13,11 @@ const About = () => {
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Story</h1>
             <p className="text-lg md:text-xl text-slate-300 mb-8">
-              MarketHub connects sellers with customers, creating a vibrant marketplace where quality products meet passionate shoppers.
+              BHP connects sellers with customers, creating a vibrant marketplace where quality products meet passionate shoppers.
             </p>
             <div className="flex items-center justify-center space-x-4">
               <Store className="h-12 w-12 text-slate-300" />
-              <span className="text-3xl font-bold">MarketHub</span>
+              <span className="text-3xl font-bold">Buy Her Power</span>
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@ const About = () => {
           <div>
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
             <p className="text-lg text-slate-600 mb-6">
-              At MarketHub, our mission is to empower businesses of all sizes by providing a platform where they can showcase their products to a global audience while offering customers a diverse marketplace to discover unique items they'll love.
+              At BuyHerPower, our mission is to empower businesses of all sizes by providing a platform where they can showcase their products to a global audience while offering customers a diverse marketplace to discover unique items they'll love.
             </p>
             <p className="text-lg text-slate-600 mb-6">
               We believe in creating opportunities for entrepreneurs and small businesses to thrive in the digital economy, fostering a community where quality, trust, and exceptional service are paramount.
@@ -117,27 +117,27 @@ const About = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
-              name: 'Sarah Johnson',
+              name: 'Mohin Zahid',
               role: 'CEO & Founder',
-              image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces',
+              image: '',
               bio: 'E-commerce veteran with 15+ years of experience in retail and digital marketplaces.'
             },
             {
-              name: 'David Chen',
+              name: 'Amir Bilal',
               role: 'CTO',
-              image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=faces',
+              image: '',
               bio: 'Tech innovator with expertise in building scalable marketplace platforms.'
             },
             {
-              name: 'Amara Okafor',
+              name: 'Yasir',
               role: 'COO',
-              image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces',
+              image: '',
               bio: 'Operations expert specialized in optimizing multi-vendor business processes.'
             },
             {
-              name: 'Michael Rivera',
-              role: 'Head of Customer Experience',
-              image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=faces',
+              name: 'Muhammad Jawad',
+              role: 'Devloper',
+              image: '',
               bio: 'Dedicated to creating exceptional customer journeys and seller experiences.'
             }
           ].map((member, index) => (
@@ -171,7 +171,7 @@ const About = () => {
                   Become a Seller
                 </Button>
               </Link>
-              <Link to="/products">
+              <Link to="/">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-slate-700 w-full sm:w-auto">
                   Start Shopping
                   <ArrowRight className="ml-2 h-4 w-4" />

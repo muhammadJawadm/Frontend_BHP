@@ -35,16 +35,16 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">FAQ</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Shipping Info</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Returns</a></li>
+              <li><a href="/About" className="text-gray-400 hover:text-white">About Us</a></li>
+              <li><a href="/Contact" className="text-gray-400 hover:text-white">Contact</a></li>
+              {/* <li><a href="/FAQ" className="text-gray-400 hover:text-white">FAQ</a></li> */}
+              {/* <li><a href="/Shipping" className="text-gray-400 hover:text-white">Shipping Info</a></li> */}
+              {/* <li><a href="/Returns" className="text-gray-400 hover:text-white">Returns</a></li> */}
             </ul>
           </div>
 
           {/* Categories */}
-          <div>
+          {/* <div>
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-white">Electronics</a></li>
@@ -53,17 +53,17 @@ const Footer = () => {
               <li><a href="#" className="text-gray-400 hover:text-white">Sports</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white">Beauty</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Seller Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">For Sellers</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">Start Selling</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Seller Dashboard</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Seller Support</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Fees & Pricing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Seller Policies</a></li>
+              <li><a href="/seller/signup" className="text-gray-400 hover:text-white">Start Selling</a></li>
+              {/* <li><a href="/dashboard" className="text-gray-400 hover:text-white">Dashboard</a></li> */}
+              {/* <li><a href="/seller/support" className="text-gray-400 hover:text-white">Seller Support</a></li>
+              <li><a href="/seller/fees" className="text-gray-400 hover:text-white">Fees & Pricing</a></li>
+              <li><a href="/seller/policies" className="text-gray-400 hover:text-white">Seller Policies</a></li> */}
             </ul>
           </div>
         </div>

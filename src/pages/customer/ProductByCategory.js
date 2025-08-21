@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import {Link, useParams } from 'react-router-dom';
+
 
 const ProductByCategory = () => {
   const { category } = useParams();
@@ -132,7 +133,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'RS'
     }).format(price);
   };
 
@@ -295,15 +296,15 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
                       {product.sale_price && product.sale_price < product.price ? (
                         <>
                           <span className="text-xl font-bold text-green-600">
-                            {formatPrice(product.sale_price)}
+                            RS. {product.sale_price}
                           </span>
                           <span className="text-sm text-gray-500 line-through">
-                            {formatPrice(product.price)}
+                            RS. {product.price}
                           </span>
                         </>
                       ) : (
                         <span className="text-xl font-bold text-gray-900">
-                          {formatPrice(product.price)}
+                          {product.price}
                         </span>
                       )}
                     </div>
@@ -321,7 +322,9 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
                   {/* Action Buttons */}
                   <div className="flex space-x-2">
                     <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                      Add to Cart
+                      <Link to={`/viewproduct/${product._id}`}>
+                      Buy Now
+                      </Link>
                     </button>
                     <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                       <span className="text-lg">❤️</span>

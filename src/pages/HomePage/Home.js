@@ -114,7 +114,7 @@ const Homepage = () => {
         {/* Cart Header */}
         <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-            <ShoppingCart className="h-5 w-5 mr-2" />
+            <ShoppingCart className="h-5 w-5 mr-2 " />
             Cart ({getCartItemsCount()})
           </h2>
           <button
@@ -348,7 +348,7 @@ const Homepage = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-12 bg-slate-800">
+      {/* <section className="py-12 bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Stay Updated</h2>
           <p className="text-xl text-slate-300 mb-8">Get the latest deals and offers delivered to your inbox</p>
@@ -363,7 +363,7 @@ const Homepage = () => {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-slate-900 to-slate-800">
