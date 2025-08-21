@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate,Link } from 'react-router-dom';
+import { useParams, useNavigate,Link, redirect } from 'react-router-dom';
 import { 
   ShoppingCart, 
   Heart, 
@@ -22,6 +22,8 @@ import {
   StickyNote,
   Download
 } from 'lucide-react';
+
+// const navigate = useNavigate();
 
 // UI Components
 const Button = ({ children, className = "", variant = "default", size = "default", onClick, disabled, ...props }) => {
@@ -292,6 +294,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
       const token = localStorage.getItem('token');
       if (!token) {
         alert('Please login to continue');
+        window.location.href = '/customer/login';
         return;
       }
 
@@ -333,6 +336,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
   const handlePlaceOrder = async () => {
     if (!user) {
       alert('User not found. Please login again.');
+      // navigate('/customer/login');
       return;
     }
 
