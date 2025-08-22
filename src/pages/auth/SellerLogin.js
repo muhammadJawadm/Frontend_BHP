@@ -165,7 +165,7 @@ const SellerLogin = () => {
             <div className="bg-gradient-to-r from-slate-800 to-slate-600 text-white p-3 rounded-lg">
               <Store className="h-6 w-6" />
             </div>
-            <span className="text-2xl font-bold text-slate-800">MarketHub</span>
+            <span className="text-2xl font-bold text-slate-800">BuyHerPower</span>
           </Link>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Seller Portal</h1>
           <p className="text-slate-600">Sign in to your seller account</p>

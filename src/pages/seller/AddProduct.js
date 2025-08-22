@@ -13,18 +13,18 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
 const BASE_URL = REACT_APP_API_URL;
 
 const categories = [
-  'Electronics',
-  'Fashion',
-  'Home & Living',
-  'Beauty & Care',
-  'Sports & Outdoors',
-  'Books & Media',
-  'Toys & Games',
-  'Food & Beverages',
-  'Health & Wellness',
-  'Automotive',
-  'Pet Supplies',
-  'Jewelry & Accessories'
+  "Handmade Clothing",
+  "Traditional Textiles",
+  "Crochet & Knitting",
+  "Jewelry & Accessories",
+  "Bags & Purses",
+  "Home Decor",
+  "Kitchen & Dining",
+  "Local Crafts",
+  "Organic & Herbal",
+  "Beauty & Care",
+  "Food & Homemade Items",
+  "Pet & Kids Items"
 ];
 
 const AddProduct = () => {

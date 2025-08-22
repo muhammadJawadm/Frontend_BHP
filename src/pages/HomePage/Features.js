@@ -1,38 +1,79 @@
-import React from 'react';
-import { Truck, Shield, RefreshCw } from 'lucide-react';
+import { Truck, Shield, RefreshCw } from "lucide-react"
 
 const Features = () => {
   return (
-    <section className="py-12 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-purple-500 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Why Choose{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Our Store
+            </span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Experience shopping like never before with our premium services and customer-first approach
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Truck className="h-8 w-8 text-blue-600" />
+          <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+            <div className="relative mb-6">
+              <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <Truck className="h-10 w-10 text-white" />
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Free Shipping</h3>
-            <p className="text-gray-600">Free shipping on orders over Rs.500</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+              Free Shipping
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Enjoy <span className="font-semibold text-blue-600">free shipping</span> on all orders over Rs.500 with
+              lightning-fast delivery
+            </p>
           </div>
-          
-          <div className="text-center">
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="h-8 w-8 text-green-600" />
+
+          <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+            <div className="relative mb-6">
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <Shield className="h-10 w-10 text-white" />
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Secure Payment</h3>
-            <p className="text-gray-600">100% secure and encrypted transactions</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
+              Secure Payment
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              <span className="font-semibold text-emerald-600">100% secure</span> and encrypted transactions with
+              industry-leading protection
+            </p>
           </div>
-          
-          <div className="text-center">
-            <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <RefreshCw className="h-8 w-8 text-orange-600" />
+
+          <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+            <div className="relative mb-6">
+              <div className="bg-gradient-to-br from-orange-500 to-amber-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-orange-500/25 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <RefreshCw className="h-10 w-10 text-white" />
+              </div>
+              <div className="absolute -inset-2 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Easy Returns</h3>
-            <p className="text-gray-600">30-day return policy on all items</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+              Easy Returns
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Hassle-free <span className="font-semibold text-orange-600">30-day return policy</span> on all items with
+              no questions asked
+            </p>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Features;
+export default Features
