@@ -14,15 +14,17 @@ const BASE_URL = REACT_APP_API_URL;
 
 const categories = [
   'Electronics',
-  'Clothing',
-  'Home & Garden',
-  'Sports',
-  'Books',
-  'Toys',
-  'Beauty',
+  'Fashion',
+  'Home & Living',
+  'Beauty & Care',
+  'Sports & Outdoors',
+  'Books & Media',
+  'Toys & Games',
+  'Food & Beverages',
+  'Health & Wellness',
   'Automotive',
-  'Food',
-  'Other'
+  'Pet Supplies',
+  'Jewelry & Accessories'
 ];
 
 const AddProduct = () => {

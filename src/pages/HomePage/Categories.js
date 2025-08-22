@@ -5,14 +5,18 @@ const Categories = () => {
   const navigate = useNavigate();
   
   const categories = [
-    { id: 1, name: 'Electronics', icon: '📱', count: '2.5k products' },
-    { id: 2, name: 'Fashion', icon: '👗', count: '3.2k products' },
-    { id: 3, name: 'Home & Garden', icon: '🏠', count: '1.8k products' },
-    { id: 4, name: 'Sports', icon: '⚽', count: '950 products' },
-    { id: 5, name: 'Books', icon: '📚', count: '1.2k products' },
-    { id: 6, name: 'Beauty', icon: '💄', count: '1.5k products' },
-    { id: 7, name: 'Automotive', icon: '🚗', count: '800 products' },
-    { id: 8, name: 'Toys', icon: '🧸', count: '650 products' }
+    { id: 1, name: "Electronics", icon: "📱" },
+  { id: 2, name: "Fashion", icon: "👗" },
+  { id: 3, name: "Home & Living", icon: "🏠" },
+  { id: 4, name: "Beauty & Care", icon: "💄" },
+  { id: 5, name: "Sports & Outdoors", icon: "⚽" },
+  { id: 6, name: "Books & Media", icon: "📚" },
+  { id: 7, name: "Toys & Games", icon: "🧸" },
+  { id: 8, name: "Food & Beverages", icon: "🍔" },
+  { id: 9, name: "Health & Wellness", icon: "💊" },
+  { id: 10, name: "Automotive", icon: "🚗" },
+  { id: 11, name: "Pet Supplies", icon: "🐶" },
+  { id: 12, name: "Jewelry & Accessories", icon: "💍" }
   ];
 
   const handleCategoryClick = (categoryName) => {
@@ -36,7 +40,7 @@ const Categories = () => {
             >
               <div className="text-3xl mb-2">{category.icon}</div>
               <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-slate-700">{category.name}</h3>
-              <p className="text-xs text-gray-500">{category.count}</p>
+              {/* <p className="text-xs text-gray-500">{category.count}</p> */}
             </div>
           ))}
         </div>

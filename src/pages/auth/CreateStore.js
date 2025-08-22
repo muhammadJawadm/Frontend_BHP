@@ -165,21 +165,18 @@ const CreateStore = () => {
 
     // Set default categories
     setCategories([
-      "Fashion & Clothing",
-      "Electronics", 
-      "Home & Garden",
-      "Beauty & Personal Care",
+      "Electronics",
+      "Fashion", 
+      "Home & Living",
+      "Beauty & Care",
       "Sports & Outdoors",
       "Books & Media",
       "Toys & Games",
       "Food & Beverages",
       "Health & Wellness",
-      "Art & Crafts",
       "Automotive",
       "Pet Supplies",
-      "Office Supplies",
-      "Jewelry & Accessories",
-      "Other"
+      "Jewelry & Accessories"
     ]);
 
     // Initialize seller data
