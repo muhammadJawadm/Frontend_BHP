@@ -1,16 +1,50 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Plus, Store, User, Calendar, Phone, Mail, ChevronDown } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Plus, Store, User, Calendar, Phone, Mail, ChevronDown, LogOut } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback, Button } from '../../../components/ui/UIComponents';
 
 const DashboardHeader = ({ seller, store, error, storeId }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   // Get seller initials for avatar fallback
   const getInitials = (name) => {
     if (!name) return 'U';
     return name.split(' ').map(word => word[0]).join('').toUpperCase().slice(0, 2);
+  };
+
+  // Handle logout functionality
+  const handleLogout = () => {
+    try {
+      // Remove token from localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userToken');
+      
+      // Remove token from sessionStorage
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('authToken');
+      sessionStorage.removeItem('userToken');
+      
+      // Clear any other auth-related data you might have stored
+      localStorage.removeItem('userId');
+      localStorage.removeItem('sellerId');
+      localStorage.removeItem('storeId');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('sellerId');
+      sessionStorage.removeItem('storeId');
+      
+      // Close dropdown
+      setShowDropdown(false);
+      
+      // Navigate to home page
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Still navigate to home even if there's an error clearing storage
+      navigate('/');
+    }
   };
 
   // Close dropdown when clicking outside
@@ -74,9 +108,16 @@ const DashboardHeader = ({ seller, store, error, storeId }) => {
                       </div>
                     </div>
                     
-                    
-                    
-                  
+                    {/* Logout Button */}
+                    <div className="pt-3 border-t border-slate-200">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center justify-center gap-3 p-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200 group"
+                      >
+                        <LogOut className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
+                        <span className="font-medium">Logout</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
