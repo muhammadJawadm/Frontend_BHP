@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Play, Pause, Smartphone, Shirt, Home } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Users, Smartphone, Shirt, Home, ShoppingBag } from "lucide-react"
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -11,36 +11,36 @@ const HeroSection = () => {
   const heroSlides = [
     {
       id: 1,
-      title: "Tech Revolution",
-      subtitle: "Electronics & Gadgets",
+      title: "Empower Creators",
+      subtitle: "Women-Led Handcrafted Goods",
       description:
-        "Discover the latest smartphones, laptops, and cutting-edge electronics with exclusive deals and free shipping on orders over $99",
-      image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop&crop=center",
-      bgColor: "from-blue-600 via-indigo-700 to-purple-800",
-      accentColor: "bg-blue-400",
-      icon: Smartphone,
+        "Shop unique handmade products crafted by inspiring women. Support local creators and get direct access to one-of-a-kind items made with passion.",
+      image: "https://images.unsplash.com/photo-1618587194716-40490bdba417?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      bgColor: "from-pink-600 via-pink-500 to-rose-600",
+      accentColor: "bg-pink-400",
+      icon: Users,
     },
     {
       id: 2,
-      title: "Style Statement",
-      subtitle: "Fashion & Trends",
+      title: "Promote Local Industry",
+      subtitle: "Sustainablity & Community",
       description:
-        "Elevate your wardrobe with the latest fashion trends, designer collections, and seasonal must-haves for every occasion",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop&crop=center",
+        "Every purchase helps sustain traditional skills and local economies. Join us in preserving heritage and building sustainable livelihoods in our region.",
+      image: "https://plus.unsplash.com/premium_photo-1676486613378-2686513db6be?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       bgColor: "from-pink-500 via-rose-600 to-red-700",
       accentColor: "bg-pink-400",
       icon: Shirt,
     },
     {
       id: 3,
-      title: "Dream Spaces",
-      subtitle: "Home & Living",
+      title: "Shop with Purpose",
+      subtitle: "Women-Made Collections",
       description:
-        "Transform your living space with premium furniture, decor, and home essentials that blend comfort with contemporary style",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&crop=center",
-      bgColor: "from-emerald-500 via-teal-600 to-green-700",
-      accentColor: "bg-emerald-400",
-      icon: Home,
+        "Discover handcrafted fashion, jewelry, and lifestyle products made by women entrepreneurs. Every purchase empowers a dream.",
+      image: "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      bgColor: "from-pink-600 via-rose-600 to-red-700",
+      accentColor: "bg-pink-400",
+      icon: ShoppingBag,
     },
   ]
 

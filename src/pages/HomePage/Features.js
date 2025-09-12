@@ -1,4 +1,4 @@
-import { Truck, Shield, RefreshCw } from "lucide-react"
+import { User, Factory, RefreshCw } from "lucide-react"
 
 const Features = () => {
   return (
@@ -26,33 +26,31 @@ const Features = () => {
           <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
             <div className="relative mb-6">
               <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Truck className="h-10 w-10 text-white" />
+                <User className="h-10 w-10 text-white" />
               </div>
               <div className="absolute -inset-2 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-              Free Shipping
+              Empower Women
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Enjoy <span className="font-semibold text-blue-600">free shipping</span> on all orders over Rs.500 with
-              lightning-fast delivery
-            </p>
+  Supporting <span className="font-semibold text-pink-600">women entrepreneurs</span> by giving them a platform to showcase and sell their handmade products
+</p>
           </div>
 
           <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
             <div className="relative mb-6">
               <div className="bg-gradient-to-br from-emerald-500 to-teal-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Shield className="h-10 w-10 text-white" />
+                <Factory className="h-10 w-10 text-white" />
               </div>
               <div className="absolute -inset-2 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
-              Secure Payment
+              Enable Local Industry
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              <span className="font-semibold text-emerald-600">100% secure</span> and encrypted transactions with
-              industry-leading protection
-            </p>
+  Promoting <span className="font-semibold text-green-600">local craftsmanship</span> and industries to strengthen communities and boost sustainable growth
+</p>
           </div>
 
           <div className="group text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
