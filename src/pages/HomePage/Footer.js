@@ -7,11 +7,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">BHP</h3>
+            <h3 className="text-2xl font-bold mb-4">Buy Her Power</h3>
             <p className="text-gray-400 mb-4">
-              Your trusted marketplace connecting buyers and sellers worldwide.
+              A platform where women create, communities grow, and traditions live on.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white">
                 <span className="sr-only">Facebook</span>
                 📘
@@ -28,7 +28,7 @@ const Footer = () => {
                 <span className="sr-only">LinkedIn</span>
                 💼
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -71,12 +71,12 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 BHP. All rights reserved.
+              © 2025 BHP. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm">Cookie Policy</a>
+              <a href="/PrivacyPolicy" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+              <a href="/TermsOfService" className="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+              {/* <a href="#" className="text-gray-400 hover:text-white text-sm">Cookie Policy</a> */}
             </div>
           </div>
         </div>

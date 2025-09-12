@@ -19,6 +19,8 @@ import ProductByCategory from "./pages/customer/ProductByCategory";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ShippingForm from "./pages/checkout/ShippingForm";
+import PrivacyPolicy from "./pages/customer/PrivacyPolicy";
+import TermsOfService from "./pages/customer/TermsOfService";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path="/products/category/:category" element={<ProductByCategory />} />
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/TermsOfService" element={<TermsOfService />} />
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
           {/* <Route path="/Shipping" element={<ShippingForm />} /> */}
 
         </Routes>

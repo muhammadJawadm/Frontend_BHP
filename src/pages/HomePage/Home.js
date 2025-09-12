@@ -368,14 +368,14 @@ const Homepage = () => {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Begin Your Journey as a Seller</h2>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers and sellers on BHP today
+            Create, sell, and grow with a platform built for women entrepreneurs.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link to="/seller/signup">
               <button className="border border-white text-white px-8 py-3 rounded-md hover:bg-white hover:text-slate-900 transition-colors font-semibold">
-                Start Selling
+                Join BHP Sellers
               </button>
             </Link> 
           </div>

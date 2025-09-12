@@ -61,11 +61,10 @@ const Features = () => {
               <div className="absolute -inset-2 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-              Easy Returns
+              Preserve Heritage & Culture
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Hassle-free <span className="font-semibold text-orange-600">30-day return policy</span> on all items with
-              no questions asked
+              Keep <span className="font-semibold text-orange-600">timeless crafts and traditions alive</span> by supporting women artisans who carry our cultural heritage forward.
             </p>
           </div>
         </div>
