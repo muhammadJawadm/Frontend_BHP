@@ -286,22 +286,30 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
-            <p className="text-lg text-gray-600">Discover our hand-picked selection of quality products</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.slice(0, 20).map((product) => (
-              <ProductCard key={product._id} product={product} onAddToCart={handleAddToCart} />
-            ))}
-          </div>
-        </div>
-      </section>
+{/* Featured Products Section */}
+<section className="py-12 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-8">
+      <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+      <p className="text-lg text-gray-600">Discover our hand-picked selection of quality products</p>
+    </div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.slice(0, 20).map((product) => (
+        <ProductCard key={product._id} product={product} onAddToCart={handleAddToCart} />
+      ))}
+    </div>
 
+    <div className="mt-12 flex justify-center">
+  <a
+    href="/allproduct" // change this route according to your project
+    className="px-8 py-3 border-2 border-black text-black text-lg font-semibold rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out shadow-md"
+  >
+    View All Products
+  </a>
+</div>
+  </div>
+</section>
       {/* Featured Stores Section */}
       <section className="py-12 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

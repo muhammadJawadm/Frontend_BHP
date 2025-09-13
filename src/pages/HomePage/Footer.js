@@ -37,6 +37,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/About" className="text-gray-400 hover:text-white">About Us</a></li>
               <li><a href="/Contact" className="text-gray-400 hover:text-white">Contact</a></li>
+              <li><a href="/TermsOfService" className="text-gray-400 hover:text-white">Terms of Service</a></li>
+              <li><a href="/PrivacyPolicy" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
               {/* <li><a href="/FAQ" className="text-gray-400 hover:text-white">FAQ</a></li> */}
               {/* <li><a href="/Shipping" className="text-gray-400 hover:text-white">Shipping Info</a></li> */}
               {/* <li><a href="/Returns" className="text-gray-400 hover:text-white">Returns</a></li> */}
@@ -44,22 +46,21 @@ const Footer = () => {
           </div>
 
           {/* Categories */}
-          {/* <div>
-            <h4 className="text-lg font-semibold mb-4">Categories</h4>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Customer </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">Electronics</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Fashion</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Home & Garden</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Sports</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Beauty</a></li>
-            </ul>
-          </div> */}
+              <li><a href="/Customer/Login" className="text-gray-400 hover:text-white">Customer Login</a></li>
+              <li><a href="/Customer/SignUp" className="text-gray-400 hover:text-white">Customer SignUp</a></li>
+              <li><a href="/AllProducts" className="text-gray-400 hover:text-white">View All Products</a></li>
+              </ul>
+          </div> 
 
           {/* Seller Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">For Sellers</h4>
             <ul className="space-y-2">
               <li><a href="/seller/signup" className="text-gray-400 hover:text-white">Start Selling</a></li>
+              <li><a href="/seller/login" className="text-gray-400 hover:text-white">Seller Login</a></li>
               {/* <li><a href="/dashboard" className="text-gray-400 hover:text-white">Dashboard</a></li> */}
               {/* <li><a href="/seller/support" className="text-gray-400 hover:text-white">Seller Support</a></li>
               <li><a href="/seller/fees" className="text-gray-400 hover:text-white">Fees & Pricing</a></li>

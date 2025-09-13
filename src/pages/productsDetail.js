@@ -941,7 +941,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
                 Buy Now - Rs. {(currentPrice * quantity).toLocaleString()}
               </Button>
               
-              <div className="grid grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-2 gap-4">
                 <Button variant="outline" size="lg" onClick={handleAddToCart}>
                   Add to Cart
                 </Button>
@@ -949,11 +949,11 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
                   <Share2 className="h-4 w-4 mr-2" />
                   Share
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Features */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t">
+            {/* <div className="grid grid-cols-3 gap-4 pt-6 border-t">
               <div className="text-center">
                 <Truck className="h-8 w-8 text-blue-600 mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-900">Free Delivery</p>
@@ -969,17 +969,17 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.
                 <p className="text-sm font-medium text-gray-900">Easy Returns</p>
                 <p className="text-xs text-gray-600">30 day return</p>
               </div>
-            </div>
+            </div> */}
 
             {/* Product Meta */}
             <Card>
               <CardContent>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Information</h3>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Product ID:</span>
                     <span className="font-mono text-gray-900">{product?._id}</span>
-                  </div>
+                  </div> */}
                   <div className="flex justify-between">
                     <span className="text-gray-600">Added on:</span>
                     <span className="text-gray-900">{formatDate(product?.createdAt)}</span>

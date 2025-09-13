@@ -21,6 +21,7 @@ import Contact from "./pages/Contact";
 import ShippingForm from "./pages/checkout/ShippingForm";
 import PrivacyPolicy from "./pages/customer/PrivacyPolicy";
 import TermsOfService from "./pages/customer/TermsOfService";
+import ProductsPage from "./pages/AllProductsPage";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/TermsOfService" element={<TermsOfService />} />
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-          {/* <Route path="/Shipping" element={<ShippingForm />} /> */}
+          <Route path="/AllProduct" element={<ProductsPage />} />
 
         </Routes>
         </AuthProvider>
