@@ -375,7 +375,7 @@ const ViewStore = () => {
           </Card>
           <Card>
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-blue-600">${storeStats.averagePrice}</div>
+              <div className="text-2xl font-bold text-blue-600">Rs {storeStats.averagePrice}</div>
               <div className="text-sm text-slate-600">Avg Price</div>
             </CardContent>
           </Card>
@@ -549,15 +549,15 @@ const ViewStore = () => {
                         {product.sale_price ? (
                           <>
                             <span className="text-xl font-bold text-red-600">
-                              ${product.sale_price}
+                              Rs.{product.sale_price}
                             </span>
                             <span className="text-sm text-slate-500 line-through">
-                              ${product.price}
+                              Rs.{product.price}
                             </span>
                           </>
                         ) : (
                           <span className="text-xl font-bold text-slate-900">
-                            ${product.price}
+                            Rs.{product.price}
                           </span>
                         )}
                       </div>
