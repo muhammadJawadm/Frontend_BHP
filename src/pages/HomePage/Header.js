@@ -108,7 +108,7 @@ const Header = () => {
             <img src={logo} alt="BHP Logo" className="h-24 w-24 object-contain" />
           </div>
 
-          <div className="hidden md:block flex-1 max-w-2xl mx-8">
+          {/* <div className="hidden md:block flex-1 max-w-2xl mx-8">
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-0 group-focus-within:opacity-25 transition duration-300"></div>
               <div className="relative">
@@ -124,7 +124,7 @@ const Header = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="hidden md:flex items-center space-x-4">
             {/* User Profile Section */}
@@ -213,7 +213,7 @@ const Header = () => {
         <div className="md:hidden animate-in slide-in-from-top-2 duration-200">
           <div className="px-4 pt-2 pb-4 space-y-3 bg-white/95 backdrop-blur-md shadow-xl border-t border-gray-100">
             {/* Mobile Search */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
@@ -222,7 +222,7 @@ const Header = () => {
                 placeholder="Search products..."
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
               />
-            </div>
+            </div> */}
 
             {/* Mobile User Section */}
             {user ? (
@@ -252,7 +252,7 @@ const Header = () => {
             ) : (
               <button
                 className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleSignInClick}
               >
                 Sign In
               </button>
