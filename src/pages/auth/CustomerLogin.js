@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Label } from '../../components/ui/label';
 import { useToast } from '../../hooks/use-toast';
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'https://buyherpower.onrender.com';
+import logo from '../../assets/Black - Copy.png';
 
 
 const CustomerLogin = () => {
@@ -93,18 +94,20 @@ const CustomerLogin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+      <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center">
-          <Link to="/" className="inline-flex items-center space-x-2 mb-6">
-            <div className="bg-gradient-to-r from-slate-800 to-slate-600 text-white p-3 rounded-lg">
-              <ShoppingBag className="h-6 w-6" />
-            </div>
-            <span className="text-2xl font-bold text-slate-800">BHP</span>
-          </Link>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h1>
-          <p className="text-slate-600">Sign in to your customer account</p>
-        </div>
+       <div className="text-center mb-8">
+  <Link to="/" className="inline-flex items-center">
+    <img
+      src={logo}
+      alt="BHP Logo"
+      className=" object-contain block mx-auto mb-14"
+    />
+  </Link>
+  <h1 className="text-3xl font-bold text-slate-900 -mt-8 mb-0">Welcome Back</h1>
+  <p className="text-slate-600 mt-0">Sign in to your customer account</p>
+</div>
+
 
         {/* Login Form */}
         <Card>
