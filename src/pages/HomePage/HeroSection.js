@@ -26,7 +26,7 @@ const HeroSection = () => {
       subtitle: "Sustainablity & Community",
       description:
         "Every purchase helps sustain traditional skills and local economies. Join us in preserving heritage and building sustainable livelihoods in our region.",
-      image: "https://plus.unsplash.com/premium_photo-1676486613378-2686513db6be?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "https://d2hijos0r2m9rf.cloudfront.net/uploads/blog_image/blog_266.jpg",
       bgColor: "from-pink-500 via-rose-600 to-red-700",
       accentColor: "bg-pink-400",
       icon: Shirt,

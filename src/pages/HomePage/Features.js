@@ -18,7 +18,7 @@ const Features = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Experience shopping like never before with our premium services and customer-first approach
+            Discover unique handmade products crafted with love and purpose
           </p>
         </div>
 
