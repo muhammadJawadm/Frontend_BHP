@@ -21,7 +21,7 @@ const ProductCard = ({ product, handleEditProduct, handleDeleteProduct }) => {
             </Badge>
           )}
           <div className="absolute top-2 right-2 flex space-x-1">
-            <Button 
+            {/* <Button 
               size="sm" 
               variant="secondary" 
               className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -36,7 +36,7 @@ const ProductCard = ({ product, handleEditProduct, handleDeleteProduct }) => {
               onClick={() => handleDeleteProduct(product.id || product._id, product.name)}
             >
               <Trash2 className="h-4 w-4" />
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="p-4">
@@ -66,9 +66,9 @@ const ProductCard = ({ product, handleEditProduct, handleDeleteProduct }) => {
             </Badge>
           </div>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" className="w-full flex-1" disabled={true} >
-              <Eye className="h-4 w-4 mr-2" />
-              View
+            <Button variant="outline" size="sm" className="w-full flex-1" onClick={() => handleDeleteProduct(product.id || product._id, product.name)} >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete
             </Button>
             <Button disabled={true}
               size="sm" 

@@ -260,7 +260,8 @@ export const useDashboard = () => {
       const response = await fetch(`${BASE_URL}/api/products/${productId}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sellerToken}`
         }
       });
 
