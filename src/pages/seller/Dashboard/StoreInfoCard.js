@@ -1,8 +1,9 @@
 import React from 'react';
-import { Store, Eye, Edit, Package } from 'lucide-react';
+import { Store, Eye, Edit, Package  } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../components/ui/UIComponents';
 
-const StoreInfoCard = ({ store, handleViewStore }) => {
+const StoreInfoCard = ({ store, storeId, handleViewStore }) => {
   return (
     <Card className="mb-8">
       <CardHeader>
@@ -39,14 +40,18 @@ const StoreInfoCard = ({ store, handleViewStore }) => {
               </div>
             )}
             <div className="flex space-x-2">
+              <Link to={`/dashboard/store/${storeId}`}>
               <Button variant="outline" size="sm" onClick={handleViewStore}>
                 <Eye className="h-4 w-4 mr-2" />
                 View Store
               </Button>
-              <Button variant="outline" size="sm" disabled>
+              </Link>
+               <Link to={`/orders/${storeId}`} state={{ storeId, store }}>
+              <Button variant="outline" size="sm" >
                 <Edit className="h-4 w-4 mr-2" />
-                Edit Store
+                View Orders
               </Button>
+              </Link>
             </div>
           </div>
 

@@ -260,13 +260,15 @@ const ViewStore = () => {
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <Link to="/" state={{ storeId: storeId }}>
-            <Button variant="ghost" className="mb-4 text-slate-600 hover:text-slate-800">
+         <div className="mb-8">
+      <Button
+        variant="ghost"
+        className="mb-4 text-slate-600 hover:text-slate-800"
+        onClick={() => navigate(-1)} // 👈 go back to last page
+      >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Dashboard
+              Back
             </Button>
-          </Link>
         </div>
 
         {/* Store Header */}

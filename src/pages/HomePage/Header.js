@@ -105,7 +105,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <img src={logo} alt="BHP Logo" className="h-24 w-24 object-contain" />
+            <img src={logo} alt="BHP Logo" className="h-48 w-48 object-contain" />
           </div>
 
           {/* <div className="hidden md:block flex-1 max-w-2xl mx-8">

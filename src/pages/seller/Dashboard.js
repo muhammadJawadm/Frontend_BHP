@@ -41,6 +41,7 @@ const Dashboard = () => {
         
         <StoreInfoCard 
           store={store} 
+          storeId={storeId} 
           handleViewStore={handleViewStore} 
         />
         
