@@ -26,16 +26,16 @@ const StatsCards = ({ stats }) => {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-600">Revenue (Mock)</p>
-              <p className="text-3xl font-bold text-slate-900">Rs.{stats.totalRevenue.toLocaleString()}</p>
+              <p className="text-sm font-medium text-slate-600">Revenue</p>
+              {/* <p className="text-3xl font-bold text-slate-900">Rs.{stats.totalRevenue.toLocaleString()}</p> */}
             </div>
             <div className="bg-green-100 p-3 rounded-full">
               <DollarSign className="h-6 w-6 text-green-600" />
             </div>
           </div>
           <p className="text-sm text-green-600 mt-2">
-            <TrendingUp className="h-3 w-3 inline mr-1" />
-            +12% from last month
+            {/* <TrendingUp className="h-3 w-3 inline mr-1" /> */}
+            Coming Soon
           </p>
         </CardContent>
       </Card>
@@ -45,7 +45,7 @@ const StatsCards = ({ stats }) => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-slate-600">Average Rating</p>
-              <p className="text-3xl font-bold text-slate-900">{stats.averageRating}</p>
+              <p className="text-3xl font-bold text-slate-900">4.5</p>
             </div>
             <div className="bg-yellow-100 p-3 rounded-full">
               <Star className="h-6 w-6 text-yellow-600" />
@@ -62,7 +62,7 @@ const StatsCards = ({ stats }) => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-slate-600">Store Views</p>
-              <p className="text-3xl font-bold text-slate-900">2,845</p>
+              {/* <p className="text-3xl font-bold text-slate-900">Comming soon</p> */}
             </div>
             <div className="bg-blue-100 p-3 rounded-full">
               <Eye className="h-6 w-6 text-blue-600" />
@@ -70,7 +70,7 @@ const StatsCards = ({ stats }) => {
           </div>
           <p className="text-sm text-blue-600 mt-2">
             <TrendingUp className="h-3 w-3 inline mr-1" />
-            +8% this week
+          Coming Soon
           </p>
         </CardContent>
       </Card>

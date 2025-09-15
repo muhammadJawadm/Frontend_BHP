@@ -66,11 +66,11 @@ const ProductCard = ({ product, handleEditProduct, handleDeleteProduct }) => {
             </Badge>
           </div>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" className="w-full flex-1">
+            <Button variant="outline" size="sm" className="w-full flex-1" disabled={true} >
               <Eye className="h-4 w-4 mr-2" />
               View
             </Button>
-            <Button 
+            <Button disabled={true}
               size="sm" 
               className="w-full flex-1 bg-slate-800 hover:bg-slate-900"
               onClick={() => handleEditProduct(product.id || product._id)}
