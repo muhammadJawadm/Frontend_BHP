@@ -14,7 +14,7 @@ const Features = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Why Choose{" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Our Store
+              Our Platform
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
