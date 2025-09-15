@@ -79,7 +79,7 @@ const Header = () => {
 
   const handleSettings = () => {
     setShowUserDropdown(false)
-    navigate("/profile/settings")
+    navigate("/MyOrders/" + user.id)
   }
 
   // Close dropdown when clicking outside
